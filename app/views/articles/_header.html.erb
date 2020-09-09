@@ -1,0 +1,47 @@
+<header class="navbar navbar-fixed-top header">
+  <div class="container">
+    <nav class="nav navbar-nav navbar-left">
+      <span class="header__left">
+
+      </span>
+    </nav>
+    <nav class="nav navbar-nav navbar-right">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <% if user_signed_in? %>
+          <li class="login_name">ようこそ<%= current_user.full_name %>さん！</li>
+          <% end %>
+          <!--顧客 -->
+          <% if user_signed_in? %>
+          <li>
+            <%= link_to " マイページ", user_path(current_user), class: "btn btn-default navbar-btn header__right" %>
+          </li>
+          <li>
+            <%= link_to " 記事一覧", root_path, class: "btn btn-default navbar-btn header__right" %>
+          </li>
+          <li>
+            <%= link_to " ユーザー一覧", users_path, class: "btn btn-default navbar-btn header__right" %>
+          </li>
+          <li>
+            <%= link_to " ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-default navbar-btn header__right" %>
+          </li>
+          <!--非ログイン -->
+          <% else %>
+          <li>
+            <%= link_to " About", home_about_path, class: "btn btn-default navbar-btn header__right" %>
+          </li>
+          <li>
+            <%= link_to " 記事一覧", root_path, class: "btn btn-default navbar-btn header__right" %>
+          </li>
+          <li>
+            <%= link_to " 新規登録", new_user_registration_path, class: "btn btn-default navbar-btn header__right"%>
+          </li>
+          <li>
+            <%= link_to " ログイン", new_user_session_path, class: "btn btn-default navbar-btn header__right" %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,21 @@
+			<h2>Article detail</h2>
+			<table class="table">
+				<thead>
+					<th></th>
+				</thead>
+				<tbody>
+	      			<tr>
+	      				<td>
+	      					<%#= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %><br>
+	      					<%#=link_to user_path(@user.id) do%><%= @user.user_name %><%# end %>
+	      				</td>
+        				<td><%#=link_to root_path(@article) do%><%= @article.title %><%# end %></td>
+        				<td><%= @article.body %></td>
+
+        				<% if  @user.id == current_user.id %>
+						<td><%= link_to "Edit", edit_article_path(@article), class: "btn-sm btn-success" %></td>
+        				<td><%= link_to "Destroy", article_path(@article), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn-sm btn-danger" %></td>
+        			<% end %>
+        			</tr>
+				</tbody>
+			</table>

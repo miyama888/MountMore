@@ -1,0 +1,17 @@
+<!-- 後に移動予定あり -->
+<h3>記事を投稿する</h3>
+<%= form_for(@article, url:articles_path) do |f| %>
+<%= f.text_field :title %>
+<%= f.text_area :body %>
+<%= f.submit "記事を投稿する", class: "data-disable-with"%>
+<%end%>
+<table>
+<tr> <% @articles.each do |article| %>
+          <tr>
+            <td><%#=link_to user_path(book.user) do%><%#= attachment_image_tag book.user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %><%# end %></td>
+            <td><%=link_to article_path(article.id) do%><%= article.title %><% end %></td>
+            <td><%= article.body %></td>
+
+          <% end %>
+      </tr>
+  </table>

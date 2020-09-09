@@ -1,0 +1,22 @@
+     <h1>Editing Book</h1>
+        <%= form_for(@article) do |f| %>
+
+            <div class = "field">
+            <label>Title</label>
+              <div class="field row">
+                <%= f.text_field :title,class: "col-xs-12" %><br>
+              </div>
+            </div>
+            <div class = "field">
+              <label>Opinion</label>
+            </div>
+            <div class= "field row">
+              <%= f.text_area :body, class: "col-xs-12" %>
+            </div>
+            <div class = "actions row">
+              <%= f.submit 'Update Book', class: "btn btn-primary col-xs-12" %>
+            </div>
+            <% end %>
+              <%= link_to "Show", article_path(@article) %>
+              |
+	          <%= link_to "Back", root_path %>
