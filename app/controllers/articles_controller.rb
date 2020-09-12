@@ -1,7 +1,10 @@
 class ArticlesController < ApplicationController
 	def index
-		@article =Article.new
 		@articles = Article.all
+	end
+
+	def new
+		@article = Article.new
 	end
 
 	def create
@@ -9,10 +12,13 @@ class ArticlesController < ApplicationController
 		@article =Article.new(article_params)
 		@article.user_id =current_user.id
   		@user =current_user
+
 		if @article.save
-			redirect_to root_path(@article)
+			redirect_to articles_path(@article)
+
 		else
 			render "articles/index"
+			
 		end
 	end
 
@@ -33,6 +39,7 @@ class ArticlesController < ApplicationController
 		@article = Article.find(params[:id])
 		@user = @article.user
 		@articles = Article.all
+		@article_comment = ArticleComment.new
 	end
 
 	def destroy
@@ -41,9 +48,13 @@ class ArticlesController < ApplicationController
   		redirect_to root_path(article)
 	end
 
+	def select_prefecture
+    	render partial: 'select_prefecture', locals: {area_id: params[:area_id]}
+  	end
+
   private
 
   def article_params
-    params.require(:article).permit(:title, :body )
+    params.require(:article).permit(:title, :body, :prefecture_id, :area_id )
   end
 end

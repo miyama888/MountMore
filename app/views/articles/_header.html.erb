@@ -1,8 +1,8 @@
-<header class="navbar navbar-fixed-top header">
-  <div class="container">
+<header class="navbar navbar-fixed-top eaderh">
+  <!-- <div class="container"> -->
     <nav class="nav navbar-nav navbar-left">
       <span class="header__left">
-
+<%#=  image_tag('logo.jpg') %><br>
       </span>
     </nav>
     <nav class="nav navbar-nav navbar-right">
@@ -10,14 +10,22 @@
         <ul class="navbar-nav">
           <% if user_signed_in? %>
           <li class="login_name">ようこそ<%= current_user.full_name %>さん！</li>
+          <li>
+          <%= render 'searches/search' %>
+          </li>
+
           <% end %>
-          <!--顧客 -->
+
+          <!--ユーザー -->
           <% if user_signed_in? %>
+          <li>
+            <%= link_to " 記事を投稿する", new_article_path, class: "btn btn-default navbar-btn header__right" %>
+          </li>
           <li>
             <%= link_to " マイページ", user_path(current_user), class: "btn btn-default navbar-btn header__right" %>
           </li>
           <li>
-            <%= link_to " 記事一覧", root_path, class: "btn btn-default navbar-btn header__right" %>
+            <%= link_to " 記事一覧", articles_path, class: "btn btn-default navbar-btn header__right" %>
           </li>
           <li>
             <%= link_to " ユーザー一覧", users_path, class: "btn btn-default navbar-btn header__right" %>
@@ -43,5 +51,5 @@
         </ul>
       </div>
     </nav>
-  </div>
+  <!-- </div> -->
 </header>

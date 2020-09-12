@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_08_121010) do
+ActiveRecord::Schema.define(version: 2020_09_12_000317) do
+
+  create_table "areas", force: :cascade do |t|
+    t.string "area_name", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "article_comments", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -22,8 +28,24 @@ ActiveRecord::Schema.define(version: 2020_09_08_121010) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title", default: "", null: false
-    t.string "body", default: "", null: false
+    t.text "body", default: "", null: false
     t.integer "user_id", null: false
+    t.integer "prefecture_id", null: false
+    t.integer "area_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "article_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "prefectures", force: :cascade do |t|
+    t.string "prefecture_name", default: "", null: false
+    t.integer "area_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -43,6 +65,8 @@ ActiveRecord::Schema.define(version: 2020_09_08_121010) do
     t.string "address", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "self_image_id"
+    t.text "introduction"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

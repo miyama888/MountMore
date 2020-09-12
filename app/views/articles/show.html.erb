@@ -1,21 +1,82 @@
+<div class = "container article-list">
+  <div class = "article-list_article-logo">
 			<h2>Article detail</h2>
-			<table class="table">
+  </div>
+  <div class = "article-list_article-table">
+			<table class="article-list_table">
 				<thead>
 					<th></th>
 				</thead>
 				<tbody>
 	      			<tr>
 	      				<td>
-	      					<%#= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %><br>
-	      					<%#=link_to user_path(@user.id) do%><%= @user.user_name %><%# end %>
+	      					<%= attachment_image_tag @user, :self_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %><br>
+	      					<%=link_to user_path(@user.id) do%><%= @user.user_name %><% end %>
 	      				</td>
         				<td><%#=link_to root_path(@article) do%><%= @article.title %><%# end %></td>
         				<td><%= @article.body %></td>
+                <!-- いいね機能 -->
+            <% if @article.favorited_by?(current_user) %>
+            <td>
+              <%= link_to article_favorites_path(@article), method: :delete, remote: true do %>
+              <i class = "fa fa-heart" aria-hidden="true" style　=　"color: red;"></i>
+              <%= @article.favorites.count %>
+              <% end %>
+            </td>
+            <% else %>
+            <td>
+              <%= link_to article_favorites_path(@article), method: :post, remote: true do %>
+              <i class = "fa fa-heart-o" aria-hidden="ture" ></i>
+              <%= @article.favorites.count %>
+              <% end %>
 
+            </td>
+            <% end %>
+              <td>
+                  <a href="#comments">コメント数:<%= @article.article_comments.count %></a>
+              </td>
+              <!-- 投稿者のみ編集と削除を許可 -->
         				<% if  @user.id == current_user.id %>
-						<td><%= link_to "Edit", edit_article_path(@article), class: "btn-sm btn-success" %></td>
-        				<td><%= link_to "Destroy", article_path(@article), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn-sm btn-danger" %></td>
+						<td><%= link_to "編集", edit_article_path(@article), class: "btn-sm btn-success" %></td>
+        				<td><%= link_to "削除する", article_path(@article), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn-sm btn-danger" %></td>
         			<% end %>
         			</tr>
 				</tbody>
 			</table>
+    </div>
+      <table class="article-list_table">
+        <tbody>
+          <tr>
+          <% @article.article_comments.each do |article_comment| %>
+          <td>
+          <%= link_to user_path(article_comment.user) do%><%#= attachment_image_tag book_comment.user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %><%# end %>
+          <%= article_comment.user.user_name %>
+          </td>
+          <td>
+            <%= article_comment.comment %>
+          </td>
+
+
+
+          <% if article_comment.user == current_user %>
+            <td>
+              <%= link_to "削除する", article_article_comment_path(article_comment.article, article_comment), method: :delete, class: "btn btn-danger pull-right" %>
+            </td>
+          <% end %>
+          </tr>
+          <% end %>
+            <%end%>
+        </tbody>
+      </table>
+      <%= form_for [@article, @article_comment] do |f| %>
+            <div class = "field">
+              <p>Comment</p>
+            </div>
+            <div class= "field row">
+              <%= f.text_area :comment, class: "col-xs-12" %>
+            </div>
+            <div class = "actions row">
+              <%= f.submit "送信", class: "btn btn-primary col-xs-12" %>
+            </div>
+            <% end %>
+          </div>

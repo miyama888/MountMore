@@ -1,0 +1,11 @@
+
+<div class = "row">
+	<div class = "col-lg-12" >
+<%= form_with(url: search_path, local: true, method: :get) do %>
+    <%= text_field(@search_content, :search_word)%>
+    <%= select(@search_content, :search_type, [["user","user_match"], ["article","article_match"]])%>
+    <%= select(@search_content, :search_method, [["完全一致","perfect_match"], ["前方一致","forward_match"], ["後方一致","backward_match"], ["部分一致","partial_match"]])%>
+    <%= submit_tag "検索" %>
+<% end %>
+</div>
+</div>

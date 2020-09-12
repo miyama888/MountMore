@@ -1,0 +1,20 @@
+<div class = "container" >
+	<div class = "row" >
+<div class = "col-md-12 article-list">
+	<h1>記事投稿</h1>
+        <div class ="article-list_article-new">
+        <h3>記事を投稿する</h3>
+        <%= form_for(@article, url:articles_path) do |f| %>
+          <%= f.label :area_id %><br>
+          <%= f.collection_select :area_id, Area.all, :id, :area_name, class:"btn-group", id: 'article_area_id' %><br>
+            <div class = "prefecture">
+              <%= render partial: 'select_prefecture', locals: {area_id: Area.first.id}%>
+            </div>
+          <%= f.text_field :title %>
+          <%= f.text_area :body %>
+          <%= f.submit "記事を投稿する", class: "data-disable-with"%>
+          <%end%>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,7 +6,8 @@ class User < ApplicationRecord
 
          has_many :articles, dependent: :destroy
          has_many :article_comments, dependent: :destroy
-         attachment :profile_image
+         has_many :favorites, dependent: :destroy
+         attachment :self_image
 
    with_options presence: true do
     validates :last_name
