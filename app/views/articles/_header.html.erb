@@ -5,44 +5,44 @@
       </span>
 
 
-        <ul class="nav header_list">
+        <div class="nav header_list">
           <% if user_signed_in? %>
-          <li class="list_login_name">ようこそ<%= current_user.full_name %>さん！</li>
-          <li>
+          <div class="list_login_name">ようこそ<%= current_user.full_name %>さん！</div>
+          <div>
           <%= render 'searches/search' %>
-          </li>
+          </div>
           <% end %>
-        </ul>
-        <ul class="navbar-nav header_list">
+        </div>
+        <ul class="breadcrumb">
           <!--ユーザー -->
           <% if user_signed_in? %>
-          <li>
+          <li class="active">
             <%= link_to " 記事を投稿する", new_article_path, class: "btn btn-default navbar-btn header__right" %>
           </li>
-          <li>
+          <li class="active">
             <%= link_to " マイページ", user_path(current_user), class: "btn btn-default navbar-btn header__right" %>
           </li>
-          <li>
+          <li class="active">
             <%= link_to " 記事一覧", articles_path, class: "btn btn-default navbar-btn header__right" %>
           </li>
-          <li>
+          <li class="active">
             <%= link_to " ユーザー一覧", users_path, class: "btn btn-default navbar-btn header__right" %>
           </li>
-          <li>
+          <li class="active">
             <%= link_to " ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-default navbar-btn header__right" %>
           </li>
           <!--非ログイン -->
           <% else %>
-          <li>
+          <li class="active">
             <%= link_to " About", home_about_path, class: "btn btn-default navbar-btn header__right" %>
           </li>
-          <li>
+          <li class="active">
             <%= link_to " 記事一覧", root_path, class: "btn btn-default navbar-btn header__right" %>
           </li>
-          <li>
+          <li class="active">
             <%= link_to " 新規登録", new_user_registration_path, class: "btn btn-default navbar-btn header__right"%>
           </li>
-          <li>
+          <li class="active">
             <%= link_to " ログイン", new_user_session_path, class: "btn btn-default navbar-btn header__right" %>
           </li>
           <% end %>

@@ -4,13 +4,13 @@ class ApplicationRecord < ActiveRecord::Base
   def self.search(type,method,word)
     if type == "user_match"
               if method == "forward_match"
-                      @users = User.where("name LIKE?","#{word}%")
+                      @users = User.where("user_name LIKE?","#{word}%")
               elsif method == "backward_match"
-                      @users = User.where("name LIKE?","%#{word}")
+                      @users = User.where("user_name LIKE?","%#{word}")
               elsif method == "perfect_match"
-                      @users = User.where("name","#{word}")
+                      @users = User.where("user_name","#{word}")
               elsif method == "partial_match"
-                      @users = User.where("name LIKE?","%#{word}%")
+                      @users = User.where("user_name LIKE?","%#{word}%")
               else
                       @users = User.all
               end
