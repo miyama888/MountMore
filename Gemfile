@@ -69,3 +69,7 @@ gem 'jquery-rails'
 gem 'pry-rails'
 gem "refile", github: 'refile/refile', require: "refile/rails"
 gem "refile-mini_magick", github: 'refile/refile-mini_magick'
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
