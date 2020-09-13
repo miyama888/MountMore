@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
 
 	def new
 		@article = Article.new
+		@article.article_images.build
 	end
 
 	def create
@@ -55,6 +56,6 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :body, :prefecture_id, :area_id )
+    params.require(:article).permit(:title, :body, :prefecture_id, :area_id, article_images_images: [] )
   end
 end

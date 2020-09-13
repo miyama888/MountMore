@@ -63,7 +63,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
-gem 'refile', require: "refile/rails"
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bxslider-rails'
 gem 'jquery-rails'
 gem 'pry-rails'
+gem "refile", github: 'refile/refile', require: "refile/rails"
+gem "refile-mini_magick", github: 'refile/refile-mini_magick'

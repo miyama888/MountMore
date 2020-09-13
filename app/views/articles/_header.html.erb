@@ -1,21 +1,19 @@
-<header class="navbar navbar-fixed-top eaderh">
-  <!-- <div class="container"> -->
-    <nav class="nav navbar-nav navbar-left">
+<header class="header">
+    <nav class="header nav">
       <span class="header__left">
-<%#=  image_tag('logo.jpg') %><br>
+<%=  image_tag 'logo.jpg', size: '250x150' %>
       </span>
-    </nav>
-    <nav class="nav navbar-nav navbar-right">
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+
+
+        <ul class="nav header_list">
           <% if user_signed_in? %>
-          <li class="login_name">ようこそ<%= current_user.full_name %>さん！</li>
+          <li class="list_login_name">ようこそ<%= current_user.full_name %>さん！</li>
           <li>
           <%= render 'searches/search' %>
           </li>
-
           <% end %>
-
+        </ul>
+        <ul class="navbar-nav header_list">
           <!--ユーザー -->
           <% if user_signed_in? %>
           <li>
@@ -49,7 +47,5 @@
           </li>
           <% end %>
         </ul>
-      </div>
     </nav>
-  <!-- </div> -->
 </header>

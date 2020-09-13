@@ -6,13 +6,14 @@
         <h3>記事を投稿する</h3>
         <%= form_for(@article, url:articles_path) do |f| %>
           <%= f.label :area_id %><br>
-          <%= f.collection_select :area_id, Area.all, :id, :area_name, class:"btn-group", id: 'article_area_id' %><br>
+          <%= f.collection_select :area_id, Area.all, :id, :area_name, class: "col-xs-12", id: 'article_area_id' %><br>
             <div class = "prefecture">
-              <%= render partial: 'select_prefecture', locals: {area_id: Area.first.id}%>
+              <%= render partial: 'select_prefecture', locals: {area_id: Area.first.id}, class: "col-xs-12"%>
             </div>
-          <%= f.text_field :title %>
-          <%= f.text_area :body %>
-          <%= f.submit "記事を投稿する", class: "data-disable-with"%>
+          <%= f.text_field :title, class: "col-xs-12" %><br>
+          <%= f.text_area :body, class: "col-xs-12" %><br>
+          <%= f.attachment_field :article_images_images, multiple: true %>
+          <%= f.submit "記事を投稿する", class: "btn btn-primary btn-lg btn-block"%>
           <%end%>
       </div>
     </div>

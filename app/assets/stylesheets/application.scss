@@ -16,7 +16,11 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-.header__left {
-  font-size: 30px;
-  color: #fff;
+
+.header{
+	width: 100%;
+background-color: blue;
+}
+ul {
+  list-style: none;
 }
