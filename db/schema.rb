@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2020_09_12_155642) do
 
   create_table "areas", force: :cascade do |t|
-    t.string "area_name", default: "", null: false
+    t.string "area_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2020_09_12_155642) do
   end
 
   create_table "prefectures", force: :cascade do |t|
-    t.string "prefecture_name", default: "", null: false
+    t.string "prefecture_name", null: false
     t.integer "area_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
