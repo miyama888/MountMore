@@ -2,6 +2,20 @@
   <div class = "article-list_article-logo">
 			<h2>Article detail</h2>
   </div>
+<ul class="bxslider">
+  <% @images.each do |image| %>
+      <li>
+
+          <%# if image? %>
+            <%= attachment_image_tag image, :image %>
+          <%# else %>
+            <%#= image_tag 'no_image.png' %>
+
+          <h4><%#= image.title %></h4>
+        <%# end %>
+      </li>
+  <% end %>
+</ul>
   <div class = "article-list_article-table">
 			<table class="article-list_table">
 				<thead>
@@ -9,10 +23,12 @@
 				</thead>
 				<tbody>
 	      			<tr>
+                <% @images.each  do |image| %>
 	      				<td>
-	      					<%= attachment_image_tag @user, :self_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %><br>
+	      					<%= attachment_image_tag image, :image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %><br>
 	      					<%=link_to user_path(@user.id) do%><%= @user.user_name %><% end %>
 	      				</td>
+                <%end%>
         				<td><%#=link_to root_path(@article) do%><%= @article.title %><%# end %></td>
         				<td><%= @article.body %></td>
                 <!-- いいね機能 -->
@@ -49,7 +65,7 @@
           <tr>
           <% @article.article_comments.each do |article_comment| %>
           <td>
-          <%= link_to user_path(article_comment.user) do%><%#= attachment_image_tag book_comment.user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %><%# end %>
+          <%= link_to user_path(article_comment.user) do%><%= attachment_image_tag book_comment.user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %><%# end %>
           <%= article_comment.user.user_name %>
           </td>
           <td>

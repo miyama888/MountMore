@@ -1,19 +1,25 @@
-<header class="header">
-    <nav class="header nav">
-      <span class="header__left">
+<div class="navbar navbar-default navbar-fixed-top">
+ <div class = "container-fulid" >
+  <div class = "row" >
+    <div class = "col-ls-4 top">
+  <header class="header">
+
 <%=  image_tag 'logo.jpg', size: '250x150' %>
-      </span>
+
+      </div>
 
 
-        <div class="nav header_list">
+
           <% if user_signed_in? %>
+                            <div class = "col--8">
           <div class="list_login_name">ようこそ<%= current_user.full_name %>さん！</div>
-          <div>
+
           <%= render 'searches/search' %>
           </div>
           <% end %>
-        </div>
-        <ul class="breadcrumb">
+                        </div>
+                        <div class = "col--4 top">
+        <ul class="breadcrumb navbar">
           <!--ユーザー -->
           <% if user_signed_in? %>
           <li class="active">
@@ -47,5 +53,8 @@
           </li>
           <% end %>
         </ul>
-    </nav>
+
 </header>
+</div>
+</div>
+</div>

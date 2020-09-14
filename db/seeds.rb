@@ -36,7 +36,7 @@ Area.create!(
 	)
 Area.create!(
 	id: 8,
-	area_name: '九州地方'
+	area_name: '九州・沖縄地方'
 	)
 
 Prefecture.create!([

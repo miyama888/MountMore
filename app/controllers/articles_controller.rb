@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
 	def index
 		@articles = Article.all
+		@all_ranks = Article.find(Favorite.group(:article_id).order('count(article_id) desc').limit(5).pluck(:article_id))
 	end
 
 	def new
@@ -24,11 +25,11 @@ class ArticlesController < ApplicationController
 	end
 
 	def edit
-		@article = Article.find(params[:id])
+		@article = Article.find_by(id: params[:id])
 	end
 
 	def update
-		@article = Article.find(params[:id])
+		@article = Article.find_by(id: params[:id])
 		if @article.update(article_params)
 			redirect_to article_path(@article)
 		else
@@ -37,10 +38,11 @@ class ArticlesController < ApplicationController
 	end
 
 	def show
-		@article = Article.find(params[:id])
+		@article = Article.find_by(id:params[:id])
 		@user = @article.user
 		@articles = Article.all
 		@article_comment = ArticleComment.new
+		@images = @article.article_images
 	end
 
 	def destroy

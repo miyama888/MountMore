@@ -10,6 +10,7 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require bxslider
  *= require_tree .
  *= require_self
  */
@@ -19,8 +20,14 @@
 
 .header{
 	width: 100%;
-background-color: blue;
+
 }
 ul {
   list-style: none;
+}
+.navbar-default{
+	background-color: rgba(0,0,0,0.5);
+}
+.main-image{
+	background-image: url("<%= asset_path('japan.jpg') %>")
 }

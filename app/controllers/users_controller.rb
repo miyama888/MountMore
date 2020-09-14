@@ -22,7 +22,6 @@ class UsersController < ApplicationController
 	      redirect_to user_path, notice: "You have updated user successfully."
 	    else
 	      render :edit
-
 	    end
 	    binding.pry
 	end

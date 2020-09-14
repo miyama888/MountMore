@@ -1,12 +1,16 @@
 <div class = "container article-list">
+ <div class = "main-image">
 <div class = "row article-list" >
+</div>
 <div class = "col-ms-12 article-list_article-index">
 <table class= "user-list_user-table table-hover table-inverse">
+
+
  <% @articles.each do |article| %>
  <thead></thead>
  	  <tbody>
          <tr>
-            <td><%=link_to user_path(article.user) do%><%= attachment_image_tag article.user, :self_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left self-img", fallback: "no_image.jpg" %><% end %></td>
+            <td><%= attachment_image_tag article.user, :self_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left self-img", fallback: "no_image.jpg" %><td>
             <td><%=link_to article_path(article.id) do%><%= article.title %><% end %></td>
             <td><%= article.body %></td>
       	</tr>
@@ -17,3 +21,6 @@
 </div>
 </div>
 </div>
+<% @all_ranks.each.with_index(1) do |article, i| %>
+  第<%= i %>位<%= article.title %>
+  <% end %>

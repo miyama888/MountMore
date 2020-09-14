@@ -12,7 +12,7 @@
             </div>
           <%= f.text_field :title, class: "col-xs-12" %><br>
           <%= f.text_area :body, class: "col-xs-12" %><br>
-          <%= f.attachment_field :article_images_images, multiple: true, id: "image_file" %>
+          <%= f.attachment_field :article_images_images, multiple: true, id: "article_image" %>
           <%= f.submit "記事を投稿する", class: "btn btn-primary btn-lg btn-block"%>
           <%end%>
       </div>
@@ -25,7 +25,7 @@
   submit_button.addEventListener('click',(e)=>{
     e.preventDefault();
     // preventDefault()=クリックイベントを無効化。無効化しないと無条件にデータを送信してします。
-    var files = document.getElementById("image_file").files;
+    var files = document.getElementById("article_image").files;
     // <div><h1>は全てElement。なので、select_fileという名前がついたid(Element)を呼び出す
     // lengthが選んだファイルの数。lengthで数え上げている。filesがhtml上の選択ボックスのtype
     if(files.length>10){
