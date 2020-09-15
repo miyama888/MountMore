@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 	    else
 	      render :edit
 	    end
-	    binding.pry
+	    # binding.pry
 	end
 
 	def destroy
