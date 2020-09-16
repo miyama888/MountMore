@@ -18,7 +18,7 @@ class User < ApplicationRecord
     validates :address
     validates :user_name
     validates :email
-    validates :introduction
+ 
   end
   validates :last_kana, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'はカタカナで入力して下さい。'}
   validates :first_kana, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'はカタカナで入力して下さい。'}

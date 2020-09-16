@@ -3,7 +3,7 @@
       <div class="col-xs-12">
         <div class="field">
           <%= form_for(@user, url: user_path(@user.id)) do |f| %>
-          <label>名前</label>
+          <label>ユーザー名</label>
           <%= f.text_field :user_name, autofocus: true, class:"form-control", id:"inputName", placeholder:"ユーザー名"%>
         </div> <!--ユーザー名変更-->
         <div class="field">

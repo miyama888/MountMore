@@ -60,4 +60,8 @@ class ArticlesController < ApplicationController
   def article_params
     params.require(:article).permit(:title, :body, :prefecture_id, :area_id, article_images_images: [] )
   end
+
+  # def article_image_params
+  # 	@article.images = area_id Area.all
+  # end
 end
