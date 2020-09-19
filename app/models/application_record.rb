@@ -26,6 +26,10 @@ class ApplicationRecord < ActiveRecord::Base
               else
                       @articles = Article.all
               end
-            end
+    else type == "area_match"
+              if method == "forward_match"
+                @area = Area.where("area_name", "#{word}")
+              end
+    end
   end
 end

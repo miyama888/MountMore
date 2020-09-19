@@ -1,8 +1,17 @@
 <div class = "main-image">
 <div class = "container article-list">
   <div class = "article-list_article-logo">
-			<h2>Article detail</h2>
+			<h2>記事詳細</h2>
   </div>
+  <%= @article.inspect %>
+  <div id='map' data-lat="<%= @article.latitude %>" data-lon="<%= @article.longitude %>">
+</div>
+
+<style>
+#map{
+  height: 400px;
+}
+</style>
 <ul class="bxslider">
   <% @images.each do |image| %>
       <li>
@@ -33,24 +42,13 @@
         				<td><%#=link_to root_path(@article) do%><%= @article.title %><%# end %></td>
         				<td><%= @article.body %></td>
                 <!-- いいね機能 -->
-            <% if @article.favorited_by?(current_user) %>
-            <td>
-              <%= link_to article_favorites_path(@article), method: :delete, remote: true do %>
-              <i class = "fa fa-heart" aria-hidden="true" style　=　"color: red;"></i>
-              <%= @article.favorites.count %>
-              <% end %>
-            </td>
-            <% else %>
-            <td>
-              <%= link_to article_favorites_path(@article), method: :post, remote: true do %>
-              <i class = "fa fa-heart-o" aria-hidden="ture" ></i>
-              <%= @article.favorites.count %>
-              <% end %>
 
-            </td>
-            <% end %>
+                <td id='<%= "favorite_#{@article.id}" %>'
+                  <%= render 'favorites/favorite', article: @article %>
+                </td>
+                <!-- コメント数表示 -->
               <td>
-                  <a href="#comments">コメント数:<%= @article.article_comments.count %></a>
+                コメント数:<%= @article.article_comments.count %>
               </td>
               <!-- 投稿者のみ編集と削除を許可 -->
         				<% if  @user.id == current_user.id %>
@@ -61,6 +59,7 @@
 				</tbody>
 			</table>
     </div>
+    <!-- 記事に対してのコメントを表示 -->
       <table class="article-list_table">
         <tbody>
           <tr>
@@ -74,7 +73,7 @@
           </td>
 
 
-
+          <!-- コメント主のみ削除可能 -->
           <% if article_comment.user == current_user %>
             <td>
               <%= link_to "削除する", article_article_comment_path(article_comment.article, article_comment), method: :delete, class: "btn btn-danger pull-right" %>
@@ -85,16 +84,85 @@
             <%end%>
         </tbody>
       </table>
+      <!-- 記事に対するコメントをする。 -->
       <%= form_for [@article, @article_comment] do |f| %>
             <div class = "field">
-              <p>Comment</p>
+              <h2>記事へコメント</h2>
             </div>
             <div class= "field row">
               <%= f.text_area :comment, class: "col-xs-12" %>
             </div>
             <div class = "actions row">
-              <%= f.submit "送信", class: "btn btn-primary col-xs-12" %>
+              <%= f.submit "コメントする", class: "btn btn-primary col-xs-12" %>
             </div>
             <% end %>
           </div>
         </div>
+
+<script>
+/*
+mapを関数の外で定義(codeAddressでも使うため)
+geocoderを用意
+*/
+const mapElement = document.getElementById('map')
+const latitude = parseFloat(mapElement.dataset.lat)
+const longitude = parseFloat(mapElement.dataset.lon)
+let map
+        // google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
+        // google.maps.Markerインスタンスを生成
+        var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+        });
+
+function initMap(){
+  map = new google.maps.Map(document.getElementById('map'), {
+  center: {lat: latitude, lng: longitude},
+  zoom: 8
+  });
+ // 保存された地図情報からピンをさす
+
+    // google.maps.LatLngインスタンスを生成
+    pos = new google.maps.LatLng(
+    latitude, //latitude
+    longitude //longitude
+    );
+    default_marker = new google.maps.Marker({
+    map: map,
+    position: pos,
+    icon: {
+    url: ' https://maps.google.com/mapfiles/ms/icons/green-dot.png', //アイコンのURL
+    scaledSize: new google.maps.Size(40, 40) //サイズ
+    }
+    });
+
+
+
+}
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=&callback
+=initMap" async defer></script>
+
+<!-- 写真複数投稿 -->
+<script>
+  // idについてクリック等のイベントが生じたら、eいかを実行せよという命令。e＝イベント情報を示す。EventListenerとは、イベントを拾う（今回でいうclick）
+  document.getElementById('post').addEventListener('click',(e)=>{
+    e.preventDefault();
+    document.getElementById('new_article').name = 'new_article'
+    // formに強制的にnew_articleと任意の名前を付与
+    // preventDefault()=クリックイベントを無効化。無効化しないと無条件にデータを送信してします。
+    var files = document.getElementById("article_image").files;
+    // <div><h1>は全てElement。なので、article_imageという名前がついたid(Element)を呼び出す
+    // lengthが選んだファイルの数。lengthで数え上げている。filesがhtml上の選択ボックスのtype
+    if(files.length>5){
+      alert('画像ファイルは5枚以内で投稿して下さい')
+    }
+    else{
+       document.new_article.submit()
+       // このnew_articleは5行目で任意につけたフォーム。このdocument.form.submit()で、preventDefault();で無効化したものを再度有効化している。
+    }
+  });
+</script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=&callback
+=initMap" async defer></script>

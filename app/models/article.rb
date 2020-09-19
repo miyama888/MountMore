@@ -8,8 +8,13 @@ class Article < ApplicationRecord
 
 	validates :title, presence: true
 	validates :body, presence: true, length: {maximum: 500}
+	validate :presence_image
 
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
+  end
+
+  def presence_image
+  errors.add(:article, "写真を投稿してください") if article_images.size == 0
   end
 end

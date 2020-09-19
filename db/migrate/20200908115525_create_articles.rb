@@ -6,6 +6,8 @@ class CreateArticles < ActiveRecord::Migration[5.2]
       t.integer :user_id, null: false
       t.integer :prefecture_id, null: false
       t.integer :area_id, null: false
+      t.float :latitude
+      t.float :longitude
       t.timestamps
     end
   end

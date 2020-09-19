@@ -10,8 +10,8 @@ def search
 	elsif type == "article_match"
     	@articles = Article.search(type,method,word)
     	render template: "searches/article_search"
-    else
-        @areas = Area.search()
+    else type == "article_match"
+        @areas = Area.search(type,method,word)
 	end
 end
 

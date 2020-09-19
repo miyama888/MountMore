@@ -1,22 +1,46 @@
-     <h1>Editing Book</h1>
+<div class = "container">
+     <h1>記事を編集する</h1>
         <%= form_for(@article) do |f| %>
 
             <div class = "field">
-            <label>Title</label>
+            <label>タイトル</label>
               <div class="field row">
                 <%= f.text_field :title,class: "col-xs-12" %><br>
               </div>
             </div>
             <div class = "field">
-              <label>Opinion</label>
+              <label>内容</label>
             </div>
             <div class= "field row">
               <%= f.text_area :body, class: "col-xs-12" %>
             </div>
+            <div class = "row">
+            <%= f.attachment_field :article_images_images, multiple: true, id: "article_image" %>
+          </div>
             <div class = "actions row">
               <%= f.submit '内容を更新する', class: "btn btn-primary col-xs-12" %>
             </div>
             <% end %>
-              <%= link_to "Show", article_path(@article) %>
+              <%= link_to "詳細へ", article_path(@article) %>
               |
-	          <%= link_to "Back", root_path %>
+	          <%= link_to "戻る", root_path %>
+          </div>
+<script>
+  // idについてクリック等のイベントが生じたら、eいかを実行せよという命令。e＝イベント情報を示す。EventListenerとは、イベントを拾う（今回でいうclick）
+  document.getElementById('post').addEventListener('click',(e)=>{
+    e.preventDefault();
+    document.getElementById('new_article').name = 'new_article'
+    // formに強制的にnew_articleと任意の名前を付与
+    // preventDefault()=クリックイベントを無効化。無効化しないと無条件にデータを送信してします。
+    var files = document.getElementById("article_image").files;
+    // <div><h1>は全てElement。なので、article_imageという名前がついたid(Element)を呼び出す
+    // lengthが選んだファイルの数。lengthで数え上げている。filesがhtml上の選択ボックスのtype
+    if(files.length>5){
+      alert('画像ファイルは5枚以内で投稿して下さい')
+    }
+    else{
+       document.new_article.submit()
+       // このnew_articleは5行目で任意につけたフォーム。このdocument.form.submit()で、preventDefault();で無効化したものを再度有効化している。
+    }
+  });
+</script>

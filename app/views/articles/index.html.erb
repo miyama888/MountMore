@@ -1,46 +1,96 @@
 
-<div class = "container article-list">
 
-<div class = "row article-list" >
-   <div class = "main-image">
-<!-- <img src="image/japan.jpg" usemap="#ImageMap" alt="" /> -->
-<div id="map-container"></div>
-<%#= image_tag 'japan.jpg', alt: '', usemap: '#ImageMap' %>
-<map name="ImageMap">
-  <area shape="rect" coords="712,56,984,180" href="#" alt="" />
-  <area shape="rect" coords="523,278,965,486" href="#" alt="" />
-  <area shape="rect" coords="1133,311,1471,515" href="#" alt="" />
-  <area shape="rect" coords="1085,563,1448,815" href="#" alt="" />
-  <area shape="rect" coords="1126,858,1492,1115" href="#" alt="" />
-  <area shape="rect" coords="672,813,1025,974" href="#" alt="" />
-  <area shape="rect" coords="196,509,651,680" href="#" alt="" />
-  <area shape="rect" coords="140,741,501,989" href="#" alt="" />
-  <area shape="rect" coords="582,1030,865,1156" href="#" alt="" />
-</map>
+   <div class = "main">
+    <!-- 画像スライダーで投稿されている画像全てをスライド表示 -->
 
-</div>
-<div class = "col-ms-12 article-list_article-index">
+<!-- イメージングマップを表示する -->
+
+<div class = "box">
+  <div class = "box__left new_event">
+    <div id="map-container"></div>
+  </div>
+
+<% @all_ranks.each.with_index(1) do |article, i| %>
+      <div class = "box__right">
+                        
+  <!-- 記事に対するいいねの数でランキングを表示 -->
+      <article class = "ranking">
+              <aside class = "ranking__aside">
+                <figure class = "container__card--mini__badge--rank ranking__figure">
+
+                </figure>
+                  <div class = "ranking__link">
+                    第<%= i %>位
+                    <%= article.title %>
+                  </div>
+            </aside>
+          </artilcle>
+    </div>
+
+<% end %>
+   </div>
+
+
+
+
+<div class = "row">
+<!-- 記事一覧を表示 -->
+<div class = "col-md-9 article-list_article-index">
 <table class= "user-list_user-table table-hover table-inverse">
+</table>
+<!-- 記事の一覧を表示 -->
+ <%# @articles.each do |article| %>
+<div class = "box">
+  <div class="card" style="width: 18rem;">
+    <title>Placeholder</title>
+      <% @articles.each do |article| %>
+      <% article.article_images.each do |image| %>
+          <%= attachment_image_tag image, :image, :fill, 60, 60, format: 'jpeg' %>
+      <%end%>
+
+        <text fill="#dee2e6" dy=".3em" x="50%" y="50%">該当記事</text></div>
 
 
- <% @articles.each do |article| %>
- <thead></thead>
- 	  <tbody>
-         <tr>
-            <td><%= attachment_image_tag article.user, :self_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left self-img", fallback: "no_image.jpg" %><td>
-            <td><%=link_to article_path(article.id) do%><%= article.title %><% end %></td>
-            <td><%= article.body %></td>
-      	</tr>
-      </tbody>
+
+  <div class="card-body">
+    <h5 class="card-title"><%=link_to article_path(article.id) do%><%= article.title %><% end %></h5>
+    <p class="card-text"><%= article.body %></p>
+
+        <div class="card-footer">
+      <small class="text-muted"><%= article.prefecture.area.area_name %>
+
+  </div></small>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="row">
+  <%# @articles_c.each do |clip| %>
+    <div class="col-md-3">
+      <div class="card">
+
+
+        <%#= link_to clip.title, clip %>
+        <%#= clip.description %>
+      </div>
+    </div>
+  <%# end %>
+<!-- </div> -->
+
+<%#= attachment_image_tag article.user, :self_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left self-img", fallback: "no_image.jpg" %>
+
+
           <% end %>
 
-  </table>
+
+
+
+
+  </div>
 </div>
-</div>
-</div>
-<% @all_ranks.each.with_index(1) do |article, i| %>
-  第<%= i %>位<%= article.title %>
-  <% end %>
+
+  <!-- イメージングマップのJS -->
   <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <%= javascript_include_tag 'jquery.japan-map.min.js' %>
 <script>
@@ -69,7 +119,7 @@ $(function(){
     ];
 
     $("#map-container").japanMap({
-        width: 250,
+        width: 600,
         selection: "area",
         areas: areas,
         backgroundColor : "#f2fcff",

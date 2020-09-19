@@ -1,4 +1,4 @@
-<h1>articles search for '<%= params[:search_word] %>' </h1>
+<h1><%= params[:search_type] %> search for '<%= params[:search_word] %>' </h1>
 		<table class= "table table-hover table-inverse"　>
 			<thead>
 				<tr>
@@ -11,7 +11,7 @@
 		<tbody>
 			<% @articles.each do |article|%>
 				<tr>
-	      			<td><%#= attachment_image_tag book.user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %></td>
+	      			<td><%#= attachment_image_tag user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %></td>
          			<td><%= article.title %></td>
          			<td><%= article.body %></td>
          			</tr>

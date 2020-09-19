@@ -1,7 +1,13 @@
 class ArticlesController < ApplicationController
+	before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+	before_action :authenticate_user!
 	def index
 		@articles = Article.all
+		@articles_c = Article.limit(4).order(created_at: :desc)
 		@all_ranks = Article.find(Favorite.group(:article_id).order('count(article_id) desc').limit(5).pluck(:article_id))
+		# 全画像情報取得
+		# @images = ArticleImage.all
+		#@article = Article.find(6)
 	end
 
 	def new
@@ -14,13 +20,11 @@ class ArticlesController < ApplicationController
 		@article =Article.new(article_params)
 		@article.user_id =current_user.id
   		@user =current_user
-
 		if @article.save
-			redirect_to articles_path(@article)
+			redirect_to article_path(@article)
 
 		else
-			render "articles/index"
-			
+			redirect_to articles_path
 		end
 	end
 
@@ -55,12 +59,21 @@ class ArticlesController < ApplicationController
     	render partial: 'select_prefecture', locals: {area_id: params[:area_id]}
   	end
 
+  	def get_location
+  		@article = Article.all.to_json(only: [:latitude, :longitude])
+  	end
   private
 
   def article_params
-    params.require(:article).permit(:title, :body, :prefecture_id, :area_id, article_images_images: [] )
+    params.require(:article).permit(:title, :body, :prefecture_id, :area_id, :latitude, :longitude, article_images_images: [] )
   end
 
+  def ensure_correct_user
+    @article = Article.find(params[:id])
+    unless @article.user == current_user
+      redirect_to articles_path
+    end
+  end
   # def article_image_params
   # 	@article.images = area_id Area.all
   # end
