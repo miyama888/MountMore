@@ -1,6 +1,7 @@
 class Article < ApplicationRecord
 	belongs_to :user
 	belongs_to :prefecture
+  belongs_to :area
 	has_many :article_comments, dependent: :destroy
 	has_many :favorites, dependent: :destroy
     has_many :article_images, dependent: :destroy

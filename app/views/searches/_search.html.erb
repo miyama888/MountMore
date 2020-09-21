@@ -1,6 +1,6 @@
-          <button type="button" class="breadcrumb glyphicon glyphicon-search" data-toggle="modal" data-target="#sampleModal">
-          	</button>
-<%= form_with(url: search_path, local: true, method: :get) do %>
+ <button type="button" class="breadcrumb glyphicon glyphicon-search" data-toggle="modal" data-target="#sampleModal">
+ </button>
+<%= form_with(url: search_path, local: true, method: :get, id: 'search_form') do %>
 <div class="modal fade" id="sampleModal" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">

@@ -16,5 +16,6 @@
 //= require activestorage
 
 //= require bxslider
-//= require bootstrap-sprockets
+//= require bootstrap
+
 //= require_tree .

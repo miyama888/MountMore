@@ -59,9 +59,7 @@ class ArticlesController < ApplicationController
     	render partial: 'select_prefecture', locals: {area_id: params[:area_id]}
   	end
 
-  	def get_location
-  		@article = Article.all.to_json(only: [:latitude, :longitude])
-  	end
+
   private
 
   def article_params

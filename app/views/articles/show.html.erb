@@ -1,87 +1,85 @@
 <div class = "main-image">
-<div class = "container article-list">
-  <div class = "article-list_article-logo">
+  <div class = "container article-list">
+    <div class = "article-list_article-logo">
 			<h2>記事詳細</h2>
-  </div>
-  <%= @article.inspect %>
-  <div id='map' data-lat="<%= @article.latitude %>" data-lon="<%= @article.longitude %>">
-</div>
+    </div>
 
-<style>
-#map{
-  height: 400px;
-}
-</style>
-<ul class="bxslider">
-  <% @images.each do |image| %>
-      <li>
+    <div id='map' data-lat="<%= @article.latitude %>" data-lon="<%= @article.longitude %>">
+    </div>
 
-          <%# if image? %>
-            <%= attachment_image_tag image, :image %>
-          <%# else %>
-            <%#= image_tag 'no_image.png' %>
+    <style>
+          #map{
+        height: 400px;
+      }
+    </style>
+    <ul class="bxslider">
+      <% @images.each do |image| %>
+          <li>
+                <%= attachment_image_tag image, :image %>
+          </li>
+      <% end %>
+    </ul>
 
-          <h4><%#= image.title %></h4>
-        <%# end %>
-      </li>
-  <% end %>
-</ul>
   <div class = "article-list_article-table">
-			<table class="article-list_table">
+			<table class="table table-hover table-inverse">
 				<thead>
 					<th></th>
 				</thead>
 				<tbody>
-	      			<tr>
-                <% @images.each  do |image| %>
-	      				<td>
-	      					<%= attachment_image_tag image, :image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %><br>
-	      					<%=link_to user_path(@user.id) do%><%= @user.user_name %><% end %>
-	      				</td>
-                <%end%>
-        				<td><%#=link_to root_path(@article) do%><%= @article.title %><%# end %></td>
-        				<td><%= @article.body %></td>
-                <!-- いいね機能 -->
+	      	<tr>
+            <% @images.each  do |image| %>
+      				<td>
+      					<%= attachment_image_tag image, :image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %><br>
+      					<%=link_to user_path(@user.id) do%><%= @user.user_name %><% end %>
+      				</td>
+            <%end%>
+    				<td><%#=link_to root_path(@article) do%><%= @article.title %><%# end %></td>
+    				<td><%= @article.body %></td>
+            <!-- いいね機能 -->
 
-                <td id='<%= "favorite_#{@article.id}" %>'
-                  <%= render 'favorites/favorite', article: @article %>
-                </td>
-                <!-- コメント数表示 -->
-              <td>
-                コメント数:<%= @article.article_comments.count %>
-              </td>
-              <!-- 投稿者のみ編集と削除を許可 -->
-        				<% if  @user.id == current_user.id %>
-						<td><%= link_to "編集", edit_article_path(@article), class: "btn-sm btn-success" %></td>
-        				<td><%= link_to "削除する", article_path(@article), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn-sm btn-danger" %></td>
-        			<% end %>
-        			</tr>
+
+            <td id=<%= "favorite_#{@article.id}" %> >
+              <%= render 'favorites/favorite', article: @article %>
+            </td>
+
+
+            <!-- コメント数表示 -->
+          <td>
+            コメント数:<%= @article.article_comments.count %>
+          </td>
+          <!-- 投稿者のみ編集と削除を許可 -->
+    				<% if  @user.id == current_user.id %>
+				      <td><%= link_to "編集", edit_article_path(@article), class: "btn-sm btn-success" %></td>
+    				  <td><%= link_to "削除する", article_path(@article), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn-sm btn-danger" %></td>
+    			   <% end %>
+        	</tr>
 				</tbody>
 			</table>
     </div>
+
     <!-- 記事に対してのコメントを表示 -->
-      <table class="article-list_table">
+      <table class="table table-hover table-inverse">
         <tbody>
           <tr>
-          <% @article.article_comments.each do |article_comment| %>
-          <td>
-          <%= link_to user_path(article_comment.user) do%><%= attachment_image_tag book_comment.user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %><%# end %>
-          <%= article_comment.user.user_name %>
-          </td>
-          <td>
-            <%= article_comment.comment %>
-          </td>
+            <% @article.article_comments.each do |article_comment| %>
+              <td>
+              <%#= link_to user_path(article_comment.user) do%><%#= attachment_image_tag article_comment.user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %>
+              <%= article_comment.user.user_name %>
+              </td>
+              <td>
+                <%= article_comment.comment %>
+              </td>
 
 
-          <!-- コメント主のみ削除可能 -->
-          <% if article_comment.user == current_user %>
-            <td>
-              <%= link_to "削除する", article_article_comment_path(article_comment.article, article_comment), method: :delete, class: "btn btn-danger pull-right" %>
-            </td>
-          <% end %>
-          </tr>
-          <% end %>
+              <!-- コメント主のみ削除可能 -->
+              <% if article_comment.user == current_user %>
+                <td>
+                  <%= link_to "削除する", article_article_comment_path(article_comment.article, article_comment), method: :delete, class: "btn btn-danger pull-right" %>
+                </td>
+              <% end %>
             <%end%>
+          </tr>
+          <%# end %>
         </tbody>
       </table>
       <!-- 記事に対するコメントをする。 -->
@@ -95,9 +93,9 @@
             <div class = "actions row">
               <%= f.submit "コメントする", class: "btn btn-primary col-xs-12" %>
             </div>
-            <% end %>
-          </div>
-        </div>
+      <% end %>
+  </div>
+</div>
 
 <script>
 /*
@@ -141,8 +139,7 @@ function initMap(){
 }
 
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=&callback
-=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>
 
 <!-- 写真複数投稿 -->
 <script>
@@ -164,5 +161,3 @@ function initMap(){
     }
   });
 </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=&callback
-=initMap" async defer></script>
