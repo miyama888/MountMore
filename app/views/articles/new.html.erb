@@ -49,7 +49,7 @@ geocoderを用意
 
 let map
 let geocoder
-
+let marker = false
 function initMap(){
   // geocoderを初期化
   geocoder = new google.maps.Geocoder()
@@ -69,8 +69,10 @@ function codeAddress(){
     if (status == 'OK') {
 　　　　　　　　　　　　// map.setCenterで地図が移動
       map.setCenter(results[0].geometry.location);
+                    // 検索を再度実行時にマーカーが既にあれば先に立てたマーカーは削除
+      if (marker != false){marker.setMap(null)}
 　　　　　　　　　　　　// google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
-      var marker = new google.maps.Marker({
+       marker = new google.maps.Marker({
           map: map,
           position: results[0].geometry.location
       });
@@ -85,7 +87,7 @@ function codeAddress(){
   });
 }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=&callback
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV["GOOGLE_MAP_KEY"]%>&callback
 =initMap" async defer></script>
 
 <!-- 写真複数投稿 -->

@@ -4,7 +4,6 @@
     <!-- 画像スライダーで投稿されている画像全てをスライド表示 -->
 
 <!-- イメージングマップを表示する -->
-
 <div class = "box">
   <div class = "box__left new_event">
     <div id="map-container"></div>
@@ -14,49 +13,48 @@
       <div class = "box__right d-flex justify-content-end">
 
   <!-- 記事に対するいいねの数でランキングを表示 -->
-      <article class = "ranking">
-              <aside class = "ranking__aside">
-                <figure class = "container__card--mini__badge--rank ranking__figure">
-                </figure>
-                  <div class = "ranking__link">
-                    第<%= i %>位
-                    <%= article.title %>
-                  </div>
-              </aside>
-      </artilcle>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <span class = "badge">第<%= i %>位</span>
+    <%= article.title %>
+  </div>
+  <div class="panel-body">
+    <!-- 記事に関連した複数の写真からidの最初から1つだけ取ってくる -->
+            <% article.article_images.first(1).each do |image| %>
+            <%=attachment_image_tag image, :image, :fill, 100, 100, format: 'jpeg',  class: "img-responsive"%><% end %>
+  </div>
+</div>
     </div>
-
 <% end %>
    </div>
 
 <!-- 記事一覧を表示 -->
-<div class="box">
-  <div class = "row">
-    <div class="card col-md-4">
-        <% @articles.each do |article| %>
-          <% article.article_images.each do |image| %>
-        <%= attachment_image_tag image, :image, :fill, 60, 60, format: 'jpeg', class: 'card-image-top'  %>
-        <%end%>
-　　   <div class="card-body">
-        <h5 class="card-title"><%=link_to article_path(article.id) do%><%= article.title %><% end %></h5>
-        <p class="card-text"><%= article.body %></p>
-　　   </div>
-      <div class="card-footer">
-        <small class="text-muted">地方名:<%= article.prefecture.area.area_name %>|都道府県名:<%= article.prefecture.prefecture_name %></small>
+<div class = "box">
+<% @articles_c.each do |article| %>
+  <div class="container center-content">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-primary boxed panelzone">
+          <div class="panel-header">
+            <% article.article_images.first(1).each do |image| %>
+            <%=attachment_image_tag image, :image, :fill, 100, 100, format: 'jpeg',  class: "img-responsive"%><% end %>
+          </div>
+          <div class="panel-body">
+            <h5 class="panel-title"><%=link_to article_path(article.id) do%><%= article.title %><% end %></h5>
+            <td id=<%= "favorite_#{article.id}" %> ><%= render 'favorites/favorite', article: article %></td>
+            <p class="panel-body"><%= article.body %></p>
+          </div>
+          <div class="panel-footer">
+            <small class="text-muted">地方名:<%= article.prefecture.area.area_name %>|都道府県名:<%= article.prefecture.prefecture_name %></small>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-          <% end %>
-
-</div>
-</div>
-
-
+<% end %>
 </div>
 
   <!-- イメージングマップのJS -->
-  
 <%= javascript_include_tag 'jquery.japan-map.min.js' %>
 <script>
 $(function(){

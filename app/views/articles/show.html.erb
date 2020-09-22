@@ -36,13 +36,9 @@
     				<td><%#=link_to root_path(@article) do%><%= @article.title %><%# end %></td>
     				<td><%= @article.body %></td>
             <!-- いいね機能 -->
-
-
             <td id=<%= "favorite_#{@article.id}" %> >
               <%= render 'favorites/favorite', article: @article %>
             </td>
-
-
             <!-- コメント数表示 -->
           <td>
             コメント数:<%= @article.article_comments.count %>
@@ -69,8 +65,6 @@
               <td>
                 <%= article_comment.comment %>
               </td>
-
-
               <!-- コメント主のみ削除可能 -->
               <% if article_comment.user == current_user %>
                 <td>
@@ -96,7 +90,7 @@
       <% end %>
   </div>
 </div>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV["GOOGLE_MAP_KEY"]%>&callback=initMap" defer></script>
 <script>
 /*
 mapを関数の外で定義(codeAddressでも使うため)
@@ -108,10 +102,10 @@ const longitude = parseFloat(mapElement.dataset.lon)
 let map
         // google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
         // google.maps.Markerインスタンスを生成
-        var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-        });
+        // var marker = new google.maps.Marker({
+        //   map: map,
+        //   position: results[0].geometry.location
+        // });
 
 function initMap(){
   map = new google.maps.Map(document.getElementById('map'), {
@@ -133,14 +127,8 @@ function initMap(){
     scaledSize: new google.maps.Size(40, 40) //サイズ
     }
     });
-
-
-
 }
-
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>
-
 <!-- 写真複数投稿 -->
 <script>
   // idについてクリック等のイベントが生じたら、eいかを実行せよという命令。e＝イベント情報を示す。EventListenerとは、イベントを拾う（今回でいうclick）
