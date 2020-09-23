@@ -129,23 +129,3 @@ function initMap(){
     });
 }
 </script>
-<!-- 写真複数投稿 -->
-<script>
-  // idについてクリック等のイベントが生じたら、eいかを実行せよという命令。e＝イベント情報を示す。EventListenerとは、イベントを拾う（今回でいうclick）
-  document.getElementById('post').addEventListener('click',(e)=>{
-    e.preventDefault();
-    document.getElementById('new_article').name = 'new_article'
-    // formに強制的にnew_articleと任意の名前を付与
-    // preventDefault()=クリックイベントを無効化。無効化しないと無条件にデータを送信してします。
-    var files = document.getElementById("article_image").files;
-    // <div><h1>は全てElement。なので、article_imageという名前がついたid(Element)を呼び出す
-    // lengthが選んだファイルの数。lengthで数え上げている。filesがhtml上の選択ボックスのtype
-    if(files.length>5){
-      alert('画像ファイルは5枚以内で投稿して下さい')
-    }
-    else{
-       document.new_article.submit()
-       // このnew_articleは5行目で任意につけたフォーム。このdocument.form.submit()で、preventDefault();で無効化したものを再度有効化している。
-    }
-  });
-</script>

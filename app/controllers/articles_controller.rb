@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
 	before_action :ensure_correct_user, only: [:edit, :update, :destroy]
-	before_action :authenticate_user!
+	before_action :authenticate_user!, only: [:index, :new, :create, :edit, :update, :destroy]
 	def index
 		@articles = Article.all
 		@articles_c = Article.order(created_at: :desc)

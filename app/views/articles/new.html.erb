@@ -4,7 +4,6 @@
 <div class = "col-md-12 article-list">
 	<h1>記事投稿</h1>
         <div class ="article-list_article-new">
-        <h3>記事を投稿する</h3>
         <%= form_for(@article, url:articles_path) do |f| %>
           <%= f.hidden_field :latitude, id: 'form_latitude' %>
           <%= f.hidden_field :longitude, id: 'form_longitude' %>
@@ -26,7 +25,7 @@
 </div>
 </div>
 <h2>地図検索</h2>
-
+<h5>住所または郵便番号を入力し実行してください</h5>
 <!-- 地名入力用のinputを追加 -->
 <input id="address" type="textbox" value="">
 
@@ -92,12 +91,12 @@ function codeAddress(){
 
 <!-- 写真複数投稿 -->
 <script>
-  // idについてクリック等のイベントが生じたら、eいかを実行せよという命令。e＝イベント情報を示す。EventListenerとは、イベントを拾う（今回でいうclick）
+  // idについてクリック等のイベントが生じたら、e以下を実行せよという命令。e＝イベント情報を示すEventListenerとは、イベントを拾う（今回でいうclick）
   document.getElementById('post').addEventListener('click',(e)=>{
     e.preventDefault();
     document.getElementById('new_article').name = 'new_article'
     // formに強制的にnew_articleと任意の名前を付与
-    // preventDefault()=クリックイベントを無効化。無効化しないと無条件にデータを送信してします。
+    // preventDefault()=クリックイベントを無効化。無効化しないと無条件にデータを送信
     var files = document.getElementById("article_image").files;
     // <div><h1>は全てElement。なので、article_imageという名前がついたid(Element)を呼び出す
     // lengthが選んだファイルの数。lengthで数え上げている。filesがhtml上の選択ボックスのtype
@@ -106,7 +105,7 @@ function codeAddress(){
     }
     else{
        document.new_article.submit()
-       // このnew_articleは5行目で任意につけたフォーム。このdocument.form.submit()で、preventDefault();で無効化したものを再度有効化している。
+       // このnew_articleは5行目で任意につけたフォーム。このdocument.form.submit()で、preventDefault();で無効化したものを再度有効化
     }
   });
 </script>
