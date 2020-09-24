@@ -1,4 +1,4 @@
 class ArticleImage < ApplicationRecord
-	belongs_to :article
-  	attachment :image
+  belongs_to :article
+  attachment :image
 end

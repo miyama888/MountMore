@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: 7f91cb004e770f15a9ab36337b92a87e3db380f6
+  branch: master
+  specs:
+    faker (2.14.0)
+      i18n (>= 1.6, < 2)
+
+GIT
   remote: https://github.com/refile/refile-mini_magick.git
   revision: 5c7c30d57a94c4104d84eb4eb9e74ca757c1a773
   specs:
@@ -131,6 +139,11 @@ GEM
       railties (>= 3.2)
     erubi (1.9.0)
     execjs (2.7.0)
+    factory_bot (6.1.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.1.0)
+      factory_bot (~> 6.1.0)
+      railties (>= 5.0.0)
     ffi (1.13.1)
     geocoder (1.6.3)
     globalid (0.4.2)
@@ -347,6 +360,8 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   dotenv-rails
+  factory_bot_rails
+  faker!
   geocoder
   jbuilder (~> 2.5)
   jquery-rails
