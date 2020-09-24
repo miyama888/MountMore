@@ -37,7 +37,7 @@ flex-direction: row-reverse;
 }
 .top{
 	background: rgba(255,255,255,0.5);
-	background-image: url(headyama.jpg);
+	background-image: image-url("headyama.jpg");
 	background-size: cover;
 	background-position:  bottom;
 	background-blend-mode:lighten;
@@ -103,6 +103,6 @@ color: blue;
   }
 .about{
 	height: 800px;
-	background-image: url(about.jpg);
+	background-image: image-url("about.jpg");
 
 }
