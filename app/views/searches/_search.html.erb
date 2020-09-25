@@ -7,9 +7,9 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
 				<h4 class="modal-title"><%= text_field(@search_content, :search_word)%>
-    <%= select(@search_content, :search_type, [["user","user_match"], ["article","article_match"]])%></h4>
 			</div>
 			<div class="modal-body">
+    <%= select(@search_content, :search_type, [["user","user_match"], ["article","article_match"]])%></h4>
     <%= select(@search_content, :search_method, [["完全一致","perfect_match"], ["前方一致","forward_match"], ["後方一致","backward_match"], ["部分一致","partial_match"]])%>
 			</div>
 			<div class="modal-footer">

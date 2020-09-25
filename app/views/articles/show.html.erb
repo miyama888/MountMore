@@ -1,4 +1,4 @@
-<div class = "main-image">
+
   <div class = "container article-list">
     <div class = "article-list_article-logo">
 			<h2>記事詳細</h2>
@@ -27,13 +27,11 @@
 				</thead>
 				<tbody>
 	      	<tr>
-            <% @images.each  do |image| %>
+
       				<td>
-      					<%= attachment_image_tag image, :image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %><br>
       					<%=link_to user_path(@user.id) do%><%= @user.user_name %><% end %>
       				</td>
-            <%end%>
-    				<td><%#=link_to root_path(@article) do%><%= @article.title %><%# end %></td>
+    				<td><%= @article.title %></td>
     				<td><%= @article.body %></td>
             <!-- いいね機能 -->
             <td id=<%= "favorite_#{@article.id}" %> >
@@ -89,7 +87,7 @@
             </div>
       <% end %>
   </div>
-</div>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV["GOOGLE_MAP_KEY"]%>&callback=initMap" defer></script>
 <script>
 /*

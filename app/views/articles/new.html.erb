@@ -1,7 +1,7 @@
 <div class = "main-image">
   <div class = "container" >
-	<div class = "row" >
-<div class = "col-md-12 article-list">
+	  <div class = "row" >
+      <div class = "col-md-12 article-list">
 	<h1>記事投稿</h1>
         <div class ="article-list_article-new">
         <%= form_for(@article, url:articles_path) do |f| %>
@@ -19,10 +19,10 @@
         </div>
           <%= f.submit "記事を投稿する", class: "btn btn-primary btn-lg btn-block", id: 'post'%>
           <%end%>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 <h2>地図検索</h2>
 <h5>住所または郵便番号を入力し実行してください</h5>

@@ -5,7 +5,7 @@
 <!-- イメージングマップを表示する -->
       <div class = "col-xs-8">
         <h3>地域検索</h3>
-          <div id="map-container"></div>
+          <div id="map-container" ></div>
       </div>
 <div class = "col-xs-4">
 <% @all_ranks.each.with_index(1) do |article, i| %>
@@ -15,7 +15,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <span class = "badge">第<%= i %>位</span>
-        <%= article.title %>
+        <%=link_to article_path(article.id) do%><%= article.title %><% end %>
       </div>
       <div class="panel-body">
         <!-- 記事に関連した複数の写真からidの最初から1つだけ取ってくる -->
@@ -38,11 +38,14 @@
         <div class="panel panel-primary boxed panelzone">
           <div class="panel-header">
             <% article.article_images.first(1).each do |image| %>
-            <%=attachment_image_tag image, :image, :fill, 100, 100, format: 'jpeg',  class: "img-responsive"%><% end %>
+            <%=attachment_image_tag image, :image, :fill, 200, 200, format: 'jpeg',  class: "img-responsive"%><% end %>
           </div>
-          <div class="panel-body">
-            <h5 class="panel-title"><%=link_to article_path(article.id) do%><%= article.title %><% end %></h5>
+          <div class="panel-body row">
+            <h5 class="panel-title col-xs-8"><%=link_to article_path(article.id) do%><%= article.title %><% end %></h5>
+            <!-- いいね機能 -->
+            <div class = "col-xs-4">
             <td id=<%= "favorite_#{article.id}" %> ><%= render 'favorites/favorite', article: article %></td>
+          </div>
             <p class="panel-body"><%= article.body %></p>
           </div>
           <div class="panel-footer">
@@ -52,7 +55,7 @@
 
 </div>
 <% end %>
-
+</div>
 </div>
   <!-- イメージングマップのJS -->
 <%= javascript_include_tag 'jquery.japan-map.min.js' %>

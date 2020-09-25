@@ -71,7 +71,4 @@ class ArticlesController < ApplicationController
       redirect_to articles_path
     end
   end
-  # def article_image_params
-  #   @article.images = area_id Area.all
-  # end
 end
