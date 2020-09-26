@@ -14,7 +14,7 @@
             </span>
             <!-- コメント数表示 -->
             <span class="label label-info">コメント数:<%= @article.article_comments.count %></span>
-          <!-- 投稿者のみ編集と削除を許可 -->
+          <!-- ログインしているかつ投稿者のみ編集と削除を許可 -->
           <% if user_signed_in? %>
             <% if  @user.id == current_user.id %>
               <span><%= link_to "編集", edit_article_path(@article), class: "label label-success" %></span>

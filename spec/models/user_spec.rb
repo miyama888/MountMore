@@ -12,7 +12,14 @@ RSpec.describe 'Userモデルのテスト', type: :model do
         is_expected.to eq false
       end
     end
-    context ''
+
+
+    context 'introductionカラム' do
+      it '60文字以下であること' do
+        user.introduction = Faker::Lorem.characters(number:61)
+        is_expected.to eq false
+      end
+    end
   end
 
   describe 'アソシエーションのテスト' do

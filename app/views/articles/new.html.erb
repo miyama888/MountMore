@@ -94,7 +94,7 @@ function codeAddress(){
       var lngForm = document.getElementById('form_longitude')
       lngForm.value = results[0].geometry.location.lng()
     } else {
-      alert('Geocode was not successful for the following reason: ' + status);
+      alert('次の理由でジオコードが成功しませんでした: ' + status);
     }
   });
 }

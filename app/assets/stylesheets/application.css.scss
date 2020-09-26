@@ -91,7 +91,7 @@ color: blue;
 .about{
 	height: 800px;
 	background-image: image-url("about.jpg");
-
+	background-size: cover;
 }
 
 .modal-title-map{
@@ -110,6 +110,10 @@ color: blue;
 	margin-top: 100px;
 }
 
+.panel-body{
+
+
+}
 .footer_head{
 
 	height: 200px;
@@ -122,4 +126,29 @@ color: blue;
 .foot{
 	text-align: center;
 	padding-top: 100px;
+}
+ #error_explanation{
+	width: 600px;
+	border: 2px solid red;
+	padding: 7px;
+	padding-bottom: 0px;
+	margin-bottom: 20px;
+	margin-left: 100px;
+	background-color: #f0f0f0;
+	text-align: center;
+}
+
+#error_explanation h2{
+
+	font-weight: bold;
+	padding:5px 5px 5px 15px;
+	font-size: 12px;
+	margin: -7px;
+	margin-bottom: 0px;
+	background-color: #c00;
+	color: #fff;
+}
+
+.notice {
+  color: green;
 }
