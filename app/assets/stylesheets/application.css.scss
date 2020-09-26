@@ -25,6 +25,12 @@ ul {
   list-style: none;
 }
 
+.active{
+	padding-left: 5px;
+}
+.show{
+	height: 500px;
+}
 .main-image{
 
 	height: 500px;
@@ -32,6 +38,7 @@ ul {
   	background-size: cover;
   	margin-top: 100px;
 }
+
 .tav{
 flex-direction: row-reverse;
 
@@ -46,6 +53,10 @@ flex-direction: row-reverse;
 .list_login_name{
 font-size: 25px;
 color: blue;
+}
+
+.text{
+	height: 200px;
 }
 
 .ranking{
@@ -81,6 +92,13 @@ color: blue;
 	height: 800px;
 	background-image: image-url("about.jpg");
 
+}
+
+.modal-title-map{
+	font-weight: bold;
+	letter-spacing: 50px;
+	color: green;
+	text-align: center;
 }
 
 .about_text{

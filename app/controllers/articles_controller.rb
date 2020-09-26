@@ -1,12 +1,12 @@
 class ArticlesController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:index, :new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   def index
     @articles = Article.all
     @articles_c = Article.order(created_at: :desc)
     @all_ranks = Article.find(Favorite.group(:article_id).order('count(article_id) desc').limit(5).pluck(:article_id))
     # 全画像情報取得
-    # @images = ArticleImage.all
+     @images = ArticleImage.all
     # @article = Article.find(6)
   end
 
@@ -21,10 +21,10 @@ class ArticlesController < ApplicationController
     @article.user_id = current_user.id
     @user = current_user
     if @article.save
-      redirect_to article_path(@article)
+      redirect_to article_path(@article), notice: "記事を投稿しました。"
 
     else
-      redirect_to articles_path
+      render :new
     end
   end
 
@@ -35,7 +35,7 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.find_by(id: params[:id])
     if @article.update(article_params)
-      redirect_to article_path(@article)
+      redirect_to article_path(@article), notice: "記事を更新しました。"
     else
       render :edit
     end
@@ -52,7 +52,7 @@ class ArticlesController < ApplicationController
   def destroy
     article = Article.find(params[:id])
     article.destroy
-    redirect_to root_path(article)
+    redirect_to root_path(article), notice: "記事を削除しました。"
   end
 
   def select_prefecture

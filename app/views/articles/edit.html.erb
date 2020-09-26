@@ -1,7 +1,19 @@
 <div class = "container">
+<% if @article.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@article.errors.count, "error") %> prohibited this product from being saved:</h2>
+        <ul>
+          <% @article.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+<% end %>
+
      <h1>記事を編集する</h1>
         <%= form_for(@article) do |f| %>
-
+          <%= f.hidden_field :latitude, id: 'form_latitude' %>
+          <%= f.hidden_field :longitude, id: 'form_longitude' %>
             <div class = "field">
             <label>タイトル</label>
               <div class="field row">
@@ -25,6 +37,71 @@
               |
 	          <%= link_to "戻る", root_path %>
           </div>
+<h2>地図検索</h2>
+<h5>住所または郵便番号を入力し実行してください</h5>
+<!-- 地名入力用のinputを追加 -->
+<input id="address" type="textbox" value="">
+
+<!-- buttonをクリックしたらcodeAddressを実行　-->
+<input type="button" value="実行" onclick="codeAddress()">
+<div id='map'>
+</div>
+
+<style>
+#map{
+  height: 400px;
+}
+</style>
+
+<script>
+/*
+mapを関数の外で定義(codeAddressでも使うため)
+geocoderを用意
+*/
+
+let map
+let geocoder
+let marker = false
+function initMap(){
+  // geocoderを初期化
+  geocoder = new google.maps.Geocoder()
+
+  map = new google.maps.Map(document.getElementById('map'), {
+  center: {lat: 35.667875, lng: 138.226475},
+  zoom: 8
+  });
+}
+
+function codeAddress(){
+  // 入力を取得
+  let inputAddress = document.getElementById('address').value;
+
+  // geocodingしたあとmapを移動
+  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+　　　　　　　　　　　　// map.setCenterで地図が移動
+      map.setCenter(results[0].geometry.location);
+                    // 検索を再度実行時にマーカーが既にあれば先に立てたマーカーは削除
+      if (marker != false){marker.setMap(null)}
+　　　　　　　　　　　　// google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
+       marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+
+      var latForm = document.getElementById('form_latitude')
+      latForm.value = results[0].geometry.location.lat()
+      var lngForm = document.getElementById('form_longitude')
+      lngForm.value = results[0].geometry.location.lng()
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV["GOOGLE_MAP_KEY"]%>&callback
+=initMap" async defer></script>
+<!-- 写真の複数投稿 -->
 <script>
   // idについてクリック等のイベントが生じたら、eいかを実行せよという命令。e＝イベント情報を示す。EventListenerとは、イベントを拾う（今回でいうclick）
   document.getElementById('post').addEventListener('click',(e)=>{

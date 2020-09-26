@@ -2,16 +2,17 @@ require 'rails_helper'
 
 RSpec.describe 'Userモデルのテスト', type: :model do
   describe 'バリデーションのテスト' do
+    let(:user) { User.new }
     subject { user.valid? }
 
-    let(:user) { build(:user) }
 
     context 'user_nameカラム' do
       it '空欄でないこと' do
-        user.name = ''
+        user.user_name = ''
         is_expected.to eq false
       end
     end
+    context ''
   end
 
   describe 'アソシエーションのテスト' do

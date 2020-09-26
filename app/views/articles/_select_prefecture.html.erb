@@ -1,2 +1,2 @@
-<%= label :article, :prefecture_id %><br>
+<%= label :article, :prefecture_id, "都道府県名" %><br>
 <%= collection_select :article, :prefecture_id, Prefecture.where(area_id: area_id), :id, :prefecture_name, class:"select-controll" %>

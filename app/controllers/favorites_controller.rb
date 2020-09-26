@@ -1,13 +1,17 @@
 class FavoritesController < ApplicationController
+  before_action :set_article
   def create
-    @article = Article.find_by(id: params[:article_id])
-    @favorite = current_user.favorites.new(article_id: @article.id)
-    @favorite.save
+    @favorite = Favorite.create(user_id: current_user.id, article_id: @article.id)
   end
 
   def destroy
-    @article = Article.find_by(id: params[:article_id])
-    @favorite = current_user.favorites.find_by(article_id: @article.id)
+    @favorite = Favorite.find_by(user_id: current_user.id, article_id: @article.id)
     @favorite.destroy
+  end
+
+  private
+
+  def set_article
+    @article = Article.find(params[:article_id])
   end
 end

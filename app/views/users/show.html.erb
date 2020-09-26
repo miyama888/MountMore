@@ -1,4 +1,4 @@
-<div class = "container">
+<div class = "container show">
 	<div class = "row">
 		<div class ="col-xs-8">
 		<h2>記事詳細</h2>
@@ -16,7 +16,7 @@
 				<tr>
 	      			<td></td>
          			<td><%=link_to article_path(article.id) do%><%= article.title %><% end %></td>
-         			<td><%= article.body %></td>
+         			<td><%= article.body.truncate(10) %></td>
       		<% end %>
       			</tr>
 		</tbody>
@@ -24,15 +24,15 @@
 
 </div>
 <div class = "col-xs-4">
-    <h2>User info</h2>
+    <h2>ユーザー情報</h2>
     <%= attachment_image_tag @user, :self_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %>
     <table class = "table">
     <tr>
-  		<th>name</th>
+  		<th>ユーザー名</th>
   		<th><h3 class="profile-name"><%= @user.user_name %></h3></th>
     </tr>
     <tr>
-  	 <th>introduction</th>
+  	 <th>自己紹介</th>
   	 <th><p class = "profile-introduction"><%= @user.introduction %></p></th>
     </tr>
     </table>

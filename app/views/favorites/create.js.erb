@@ -1,4 +1,4 @@
 
-  $('#favorite_<%= @article.id %>').html("<%= j(render 'favorites/favorite',  article: @article ) %>");
+  $('#favorite_<%= @article.id %>').html("<%= j(render partial:'favorites/favorite',  locals: { article: @article }) %>");
 
 

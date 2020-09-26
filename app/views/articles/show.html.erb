@@ -1,9 +1,28 @@
 
   <div class = "container article-list">
     <div class = "article-list_article-logo">
-			<h2>記事詳細</h2>
+			<h1>記事詳細</h1>
     </div>
-
+    <% if user_signed_in? %>
+            <span class="label label-success">投稿者:<%=link_to user_path(@user.id) do%><%= @user.user_name %><% end %></span>
+            <% else %>
+            <span class="label label-success">投稿者:<%= @user.user_name %></span>
+            <% end %>
+            <!-- いいね機能 -->
+            <span id=<%= "favorite_#{@article.id}" %> >
+              <%= render 'favorites/favorite', article: @article %>
+            </span>
+            <!-- コメント数表示 -->
+            <span class="label label-info">コメント数:<%= @article.article_comments.count %></span>
+          <!-- 投稿者のみ編集と削除を許可 -->
+          <% if user_signed_in? %>
+            <% if  @user.id == current_user.id %>
+              <span><%= link_to "編集", edit_article_path(@article), class: "label label-success" %></span>
+              <span><%= link_to "削除する", article_path(@article), method: :delete, "data-confirm" => "本当に消しますか？", class: "label label-danger" %></span>
+             <% end %>
+             <% end%>
+<h2><%= @article.title %></h2>
+<text><%= @article.body %></text>
     <div id='map' data-lat="<%= @article.latitude %>" data-lon="<%= @article.longitude %>">
     </div>
 
@@ -12,6 +31,7 @@
         height: 400px;
       }
     </style>
+    <!-- 画像スライダー -->
     <ul class="bxslider">
       <% @images.each do |image| %>
           <li>
@@ -19,37 +39,31 @@
           </li>
       <% end %>
     </ul>
-
-  <div class = "article-list_article-table">
-			<table class="table table-hover table-inverse">
-				<thead>
-					<th></th>
-				</thead>
-				<tbody>
-	      	<tr>
-
-      				<td>
-      					<%=link_to user_path(@user.id) do%><%= @user.user_name %><% end %>
-      				</td>
-    				<td><%= @article.title %></td>
-    				<td><%= @article.body %></td>
-            <!-- いいね機能 -->
-            <td id=<%= "favorite_#{@article.id}" %> >
-              <%= render 'favorites/favorite', article: @article %>
-            </td>
-            <!-- コメント数表示 -->
-          <td>
-            コメント数:<%= @article.article_comments.count %>
-          </td>
-          <!-- 投稿者のみ編集と削除を許可 -->
-    				<% if  @user.id == current_user.id %>
-				      <td><%= link_to "編集", edit_article_path(@article), class: "btn-sm btn-success" %></td>
-    				  <td><%= link_to "削除する", article_path(@article), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn-sm btn-danger" %></td>
-    			   <% end %>
-        	</tr>
-				</tbody>
-			</table>
-    </div>
+      <!-- 記事に対するコメントをする。 -->
+      <% if user_signed_in? %>
+<% if @article_comment.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@article_comment.errors.count, "error") %> prohibited this product from being saved:</h2>
+        <ul>
+          <% @article_comment.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+<% end %>
+      <%= form_for [@article, @article_comment] do |f| %>
+            <div class = "field">
+              <h2>記事へコメント</h2>
+            </div>
+            <div class= "field row">
+              <%= f.text_area :comment, class: "col-xs-12" %>
+            </div>
+            <div class = "actions row">
+              <%= f.submit "コメントする", class: "btn btn-primary col-xs-12" %>
+            </div>
+      <% end %>
+      <% end %>
+  </div>
 
     <!-- 記事に対してのコメントを表示 -->
       <table class="table table-hover table-inverse">
@@ -71,22 +85,9 @@
               <% end %>
             <%end%>
           </tr>
-          <%# end %>
+
         </tbody>
       </table>
-      <!-- 記事に対するコメントをする。 -->
-      <%= form_for [@article, @article_comment] do |f| %>
-            <div class = "field">
-              <h2>記事へコメント</h2>
-            </div>
-            <div class= "field row">
-              <%= f.text_area :comment, class: "col-xs-12" %>
-            </div>
-            <div class = "actions row">
-              <%= f.submit "コメントする", class: "btn btn-primary col-xs-12" %>
-            </div>
-      <% end %>
-  </div>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV["GOOGLE_MAP_KEY"]%>&callback=initMap" defer></script>
 <script>
