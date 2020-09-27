@@ -17,10 +17,19 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.login-box{
+	background-image: image-url("yamahukei.jpg");
+	height: 800px;
+}
 .login{
 	text-align: center;
 	height: 500px;
+	margin-top: 250px;
 }
+.signup-box{
+	background-image: image-url("yukiyama.jpg");
+}
+
 ul {
   list-style: none;
 }
