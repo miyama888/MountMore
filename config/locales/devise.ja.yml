@@ -1,0 +1,6 @@
+ja:
+  errors:
+    messages:
+      not_saved:
+        one: "1個のエラーによりこの%{resource}の保存ができません"
+        other: "%{count}個のエラーにより%{resource}の保存ができません"
