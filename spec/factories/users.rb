@@ -7,7 +7,7 @@ FactoryBot.define do
     user_name { Faker::Lorem.characters(number: 3) }
     post_number { "2227777" }
     address { Faker::Address.state }
-    email {Faker::Internet.email}
+    email { Faker::Internet.email }
     password              { "0000000" }
     password_confirmation { "0000000" }
   end

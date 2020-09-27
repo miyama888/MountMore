@@ -19,7 +19,7 @@ class User < ApplicationRecord
     validates :user_name
     validates :email
   end
-  validates :introduction, length: { maximum: 60}
+  validates :introduction, length: { maximum: 60 }
   validates :last_kana, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'はカタカナで入力して下さい。' }
   validates :first_kana, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'はカタカナで入力して下さい。' }
   validates :post_number, format: /\A[0-9]+\z/
