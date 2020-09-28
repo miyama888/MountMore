@@ -67,11 +67,16 @@
 
     <!-- 記事に対してのコメントを表示 -->
       <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+            <td>ユーザー名</td>
+            <td>コメント</td>
+          </tr>
+        </thead>
         <tbody>
           <tr>
             <% @article.article_comments.each do |article_comment| %>
               <td>
-              <%#= link_to user_path(article_comment.user) do%><%#= attachment_image_tag article_comment.user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %>
               <%= article_comment.user.user_name %>
               </td>
               <td>

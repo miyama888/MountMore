@@ -1,20 +1,20 @@
-  <div class = "container" >
-<% if @article.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@article.errors.count, "件のエラー") %> により保存できません:</h2>
-        <ul>
-          <% @article.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-<% end %>
+<div class = "container" >
+  <% if @article.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@article.errors.count, "件のエラー") %> により保存できません:</h2>
+          <ul>
+            <% @article.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+  <% end %>
 
 	  <div class = "row" >
       <div class = "col-md-12 article-list">
-	<h1>記事投稿</h1>
+	      <h1>記事投稿</h1>
         <div class ="article-list_article-new">
-        <%= form_for(@article, url:articles_path) do |f| %>
+          <%= form_for(@article, url:articles_path) do |f| %>
           <%= f.hidden_field :latitude, id: 'form_latitude' %>
           <%= f.hidden_field :longitude, id: 'form_longitude' %>
           <%= f.label :area_id, "地方名" %><br>
@@ -22,30 +22,27 @@
             <div class = "prefecture">
               <%= render partial: 'select_prefecture', locals: {area_id: Area.first.id}, class: "col-xs-12"%>
             </div>
-            <label >タイトル</label>
-          <%= f.text_field :title, class: "col-xs-12" %><br>
-          <label>内容</label>
-          <%= f.text_area :body, class: "col-xs-12 text" %><br>
-          <div class="alert alert-danger">
-          <%= f.attachment_field :article_images_images, multiple: true, id: "article_image" %>
-        </div>
-<h2>地図検索</h2>
-<h5>住所または郵便番号を入力し実行してください</h5>
-<!-- 地名入力用のinputを追加 -->
-<input id="address" type="textbox" value="">
+              <label >タイトル</label>
+              <%= f.text_field :title, class: "col-xs-12" %><br>
+              <label>内容</label>
+              <%= f.text_area :body, class: "col-xs-12 text" %><br>
+            <div class="alert alert-danger">
+              <%= f.attachment_field :article_images_images, multiple: true, id: "article_image" %>
+            </div>
+              <h2>地図検索</h2>
+              <h5>住所または郵便番号を入力し実行してください</h5>
+              <!-- 地名入力用のinputを追加 -->
+              <input id="address" type="textbox" value="">
 
-<!-- buttonをクリックしたらcodeAddressを実行　-->
-<input type="button" value="実行" onclick="codeAddress()">
-<div id='map'>
-</div>
-          <%= f.submit "記事を投稿する", class: "btn btn-primary btn-lg btn-block", id: 'post'%>
+              <!-- buttonをクリックしたらcodeAddressを実行　-->
+              <input type="button" value="実行" onclick="codeAddress()">
+              <div id='map'></div>
+              <%= f.submit "記事を投稿する", class: "btn btn-primary btn-lg btn-block", id: 'post'%>
           <%end%>
         </div>
       </div>
     </div>
-  </div>
 </div>
-
 
 <style>
 #map{

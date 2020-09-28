@@ -10,16 +10,20 @@
 					<th colspan="3"></th>
 				</tr>
 			</thead>
-		<tbody>
-			<% @users.each do |user|%>
-				<tr>
-	      			<td><%= attachment_image_tag user, :self_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %></td>
-         			<td><%= user.user_name %></td>
-         			<td></td>
-         			</tr>
-      		<% end %>
+			<tbody>
+				<% @users.each do |user|%>
+					<tr>
+		      			<td><%= attachment_image_tag user, :self_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left profile-img", fallback: "no_image.jpg" %></td>
+		      		<% if user_signed_in? %>
+	         			<td><%= link_to user_path(user.id) do %><%= user.user_name %><% end %></td>
+	         		<% else %>
+	         			<td><%= user.user_name %></td>
+	         		<% end %>
+	         			<td></td>
+	         			</tr>
+	      		<% end %>
 
-		</tbody>
+			</tbody>
 		</table>
 	</div>
-	</div>
+</div>

@@ -3,11 +3,10 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   def index
     @articles = Article.all
-    @articles_c = Article.order(created_at: :desc)
+    @articles_c = Article.all.page(params[:page]).per(6).order(created_at: :desc)
     @all_ranks = Article.find(Favorite.group(:article_id).order('count(article_id) desc').limit(5).pluck(:article_id))
     # 全画像情報取得
     @images = ArticleImage.all
-    # @article = Article.find(6)
   end
 
   def new
