@@ -1,5 +1,4 @@
-
- <div class = "container-fulid" >
+<div class = "container-fulid" >
   <div class = "row top" >
     <div class = "col-xs-3">
       <%=  image_tag 'logo.jpg', size: '250x150' %>
@@ -23,9 +22,9 @@
                 </ul>
               </div>
             </div>
-                <div class = "row">
-                  <div class = "col-xs-12">
-                    <ul class = "nav nav-pills">
+            <div class = "row">
+              <div class = "col-xs-12">
+                <ul class = "nav nav-pills">
                   <li class="active">
                     <%= link_to " 記事を投稿する", new_article_path, class: "btn btn-default navbar-btn header__right glyphicon glyphicon-picture" %>
                   </li>
@@ -67,25 +66,25 @@
                 </ul>
               </div>
             </div>
-              <div class = "row">
-                <div class = "col-xs-12">
-                  <ul class = "nav nav-pills">
-                    <li class="active">
-                      <%= link_to " About", home_about_path, class: "btn btn-default navbar-btn header__right glyphicon glyphicon-leaf" %>
-                    </li>
-                    <li class="active">
-                      <%= link_to " 記事一覧", root_path, class: "btn btn-default navbar-btn header__right glyphicon glyphicon-list-alt" %>
-                    </li>
-                    <li class="active">
-                      <%= link_to " 新規登録", new_user_registration_path, class: "btn btn-default navbar-btn header__right glyphicon glyphicon-pencil"%>
-                    </li>
-                    <li class="active">
-                      <%= link_to " ログイン", new_user_session_path, class: "btn btn-default navbar-btn header__right glyphicon glyphicon-log-in" %>
-                    </li>
+            <div class = "row">
+              <div class = "col-xs-12">
+                <ul class = "nav nav-pills">
+                  <li class="active">
+                    <%= link_to " About", home_about_path, class: "btn btn-default navbar-btn header__right glyphicon glyphicon-leaf" %>
+                  </li>
+                  <li class="active">
+                    <%= link_to " 記事一覧", root_path, class: "btn btn-default navbar-btn header__right glyphicon glyphicon-list-alt" %>
+                  </li>
+                  <li class="active">
+                    <%= link_to " 新規登録", new_user_registration_path, class: "btn btn-default navbar-btn header__right glyphicon glyphicon-pencil"%>
+                  </li>
+                  <li class="active">
+                    <%= link_to " ログイン", new_user_session_path, class: "btn btn-default navbar-btn header__right glyphicon glyphicon-log-in" %>
+                  </li>
 
-                  </ul>
-                </div>
+                </ul>
               </div>
+            </div>
           </div>
           <% end %>
   </div>

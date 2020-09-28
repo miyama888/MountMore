@@ -1,57 +1,57 @@
 <div class = "container">
-<% if @article.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@article.errors.count, "件のエラー") %> により保存できません:</h2>
-        <ul>
-          <% @article.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-<% end %>
-
-     <h1>記事を編集する</h1>
-        <%= form_for(@article) do |f| %>
-          <%= f.hidden_field :latitude, id: 'form_latitude' %>
-          <%= f.hidden_field :longitude, id: 'form_longitude' %>
-            <div class = "field">
-            <label>タイトル</label>
-              <div class="field row">
-                <%= f.text_field :title,class: "col-xs-12" %><br>
-              </div>
-            </div>
-            <div class = "field">
-              <label>内容</label>
-            </div>
-            <div class= "field row">
-              <%= f.text_area :body, class: "col-xs-12" %>
-            </div>
-            <div class = "row">
-            <%= f.attachment_field :article_images_images, multiple: true, id: "article_image" %>
-          </div>
-            <div class = "actions row">
-              <%= f.submit '内容を更新する', class: "btn btn-primary col-xs-12" %>
-            </div>
+  <% if @article.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@article.errors.count, "件のエラー") %> により保存できません:</h2>
+          <ul>
+            <% @article.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
             <% end %>
+          </ul>
+        </div>
+  <% end %>
+
+            <h1>記事を編集する</h1>
+  <%= form_for(@article) do |f| %>
+            <%= f.hidden_field :latitude, id: 'form_latitude' %>
+            <%= f.hidden_field :longitude, id: 'form_longitude' %>
+          <div class = "field">
+          <label>タイトル</label>
+            <div class="field row">
+              <%= f.text_field :title,class: "col-xs-12" %><br>
+            </div>
+          </div>
+          <div class = "field">
+            <label>内容</label>
+          </div>
+          <div class= "field row">
+            <%= f.text_area :body, class: "col-xs-12" %>
+          </div>
+          <div class = "row">
+          <%= f.attachment_field :article_images_images, multiple: true, id: "article_image" %>
+          </div>
+          <div class = "actions row">
+            <%= f.submit '内容を更新する', class: "btn btn-primary col-xs-12" %>
+          </div>
+  <% end %>
               <%= link_to "詳細へ", article_path(@article) %>
               |
-	          <%= link_to "戻る", root_path %>
-          </div>
-<h2>地図検索</h2>
-<h5>住所または郵便番号を入力し実行してください</h5>
-<!-- 地名入力用のinputを追加 -->
-<input id="address" type="textbox" value="">
-
-<!-- buttonをクリックしたらcodeAddressを実行　-->
-<input type="button" value="実行" onclick="codeAddress()">
-<div id='map'>
+	           <%= link_to "戻る", root_path %>
 </div>
+  <h2>地図検索</h2>
+  <h5>住所または郵便番号を入力し実行してください</h5>
+  <!-- 地名入力用のinputを追加 -->
+  <input id="address" type="textbox" value="">
 
-<style>
-#map{
-  height: 400px;
-}
-</style>
+  <!-- buttonをクリックしたらcodeAddressを実行　-->
+  <input type="button" value="実行" onclick="codeAddress()">
+  <div id='map'>
+  </div>
+
+  <style>
+  #map{
+    height: 400px;
+  }
+  </style>
 
 <script>
 /*
