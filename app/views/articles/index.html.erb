@@ -47,7 +47,7 @@
 <!-- 記事一覧を表示 -->
   <div class = "row">
     <% @articles_c.each do |article| %>
-      <div class = "col-xs-4">
+      <div class = "col-xs-4 panel-box">
         <div class="panel panel-primary boxed panelzone">
           <div class="panel-header">
             <% article.article_images.first(1).each do |image| %>
@@ -59,7 +59,7 @@
             <div class = "col-xs-4">
               <span id=<%= "favorite_#{article.id}" %> ><%= render 'favorites/favorite', article: article%></span>
             </div>
-            <p class="panel-body"><%= article.body.truncate(50) %></p>
+            <p class="panel-body"><%= article.body.truncate(20) %></p>
           </div>
           <div class="panel-footer">
             <span class="label label-success">投稿者:<%= article.user.user_name %></span><br>
