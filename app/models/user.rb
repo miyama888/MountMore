@@ -16,7 +16,7 @@ class User < ApplicationRecord
     validates :first_kana
     validates :post_number
     validates :address
-    validates :user_name
+    validates :user_name, uniqueness: true
     validates :email
   end
   validates :introduction, length: { maximum: 60 }
