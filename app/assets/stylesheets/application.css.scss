@@ -147,6 +147,9 @@ color: blue;
 	text-align: center;
 }
 
+#map{
+        height: 400px;
+        }
 #error_explanation h2{
 
 	font-weight: bold;
@@ -156,6 +159,14 @@ color: blue;
 	margin-bottom: 0px;
 	background-color: #c00;
 	color: #fff;
+}
+
+.glyphicon-heart{
+	color: red;
+}
+
+.glyphicon-heart-empty{
+	color: red;
 }
 
 .notice {

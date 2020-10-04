@@ -1,0 +1,26 @@
+<% image.each do|f| %>
+	<% f.tags.each do |t| %>
+		<div id = "scene-2-content">
+			<div class = "charts clearfix">
+				<div class = "chart" id = "water">
+					<div class = "circle-mask-outer left">
+						<div class = "circle-mask-inner">
+							<div class = "circle-body"></div>
+						</div>
+					</div>
+					<div class = "circle-mask-outer right">
+						<div class = "circle-mask-inner">
+							<div class = "circle-body"></div>
+						</div>
+					</div>
+					<div class = "chart-content">
+						<p class = "text">
+							<span class = "precent-number"><%= t.score * 100 %></span>
+							<span class = "precent-symbol">%</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	<% end %>
+<% end %>

@@ -17,13 +17,19 @@ class ArticlesController < ApplicationController
   def create
     @articles = Article.all
     @article = Article.new(article_params)
+    @article.score = Language.get_data(article_params[:body])
     @article.user_id = current_user.id
     @user = current_user
     if @article.save
-      redirect_to article_path(@article), notice: "記事を投稿しました。"
-
+       @article.article_images.each do |article_image|
+        tags = Vision.get_image_data(article_image.image)
+        tags.each do |tag|
+          article_image.tags.create(name: tag['description'], score: tag['score'])
+        end
+       end
+       redirect_to article_path(@article), notice: "記事を投稿しました。"
     else
-      render :new
+       render :new
     end
   end
 
@@ -56,7 +62,7 @@ class ArticlesController < ApplicationController
 
   def select_prefecture
     render partial: 'select_prefecture', locals: { area_id: params[:area_id] }
-    end
+  end
 
   private
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_12_155642) do
+ActiveRecord::Schema.define(version: 2020_10_03_140507) do
 
   create_table "areas", force: :cascade do |t|
     t.string "area_name", default: "", null: false
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2020_09_12_155642) do
     t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "score", precision: 5, scale: 3
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -55,6 +56,14 @@ ActiveRecord::Schema.define(version: 2020_09_12_155642) do
   create_table "prefectures", force: :cascade do |t|
     t.string "prefecture_name", default: "", null: false
     t.integer "area_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.decimal "score", precision: 5, scale: 3
+    t.integer "article_image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

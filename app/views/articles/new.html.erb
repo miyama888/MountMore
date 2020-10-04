@@ -44,12 +44,6 @@
     </div>
 </div>
 
-<style>
-#map{
-  height: 400px;
-}
-</style>
-
 <script>
 /*
 mapを関数の外で定義(codeAddressでも使うため)
@@ -96,12 +90,11 @@ function codeAddress(){
   });
 }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV["GOOGLE_MAP_KEY"]%>&callback
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV["GOOGLE_API_KEY"]%>&callback
 =initMap" async defer></script>
 
 <!-- 写真複数投稿 -->
 <script>
-  // idについてクリック等のイベントが生じたら、e以下を実行せよという命令。e＝イベント情報を示すEventListenerとは、イベントを拾う（今回でいうclick）
   document.getElementById('post').addEventListener('click',(e)=>{
     e.preventDefault();
     document.getElementById('new_article').name = 'new_article'
@@ -115,7 +108,6 @@ function codeAddress(){
     }
     else{
        document.new_article.submit()
-       // このnew_articleは5行目で任意につけたフォーム。このdocument.form.submit()で、preventDefault();で無効化したものを再度有効化
     }
   });
 </script>

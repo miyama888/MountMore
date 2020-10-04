@@ -21,16 +21,26 @@
         <span><%= link_to "削除する", article_path(@article), method: :delete, "data-confirm" => "本当に消しますか？", class: "label label-danger" %></span>
       <% end %>
     <% end%>
+    <!-- 感情分析値を表示 -->
+    <% if @article.score >= 0 %>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: <%= @article.score * 100%>%;">
+        <%= @article.score * 100%>
+      </div>
+    </div>
+    <% else %>
+    <div class="progress">
+      <div class="progress-bar-danger" role="progressbar" style="width: <%= @article.score * -100%>%;">
+        <%= @article.score * -100%>
+      </div>
+    </div>
+    <% end %>
       <h2><%= @article.title %></h2>
       <text><%= @article.body %></text>
     <div id='map' data-lat="<%= @article.latitude %>" data-lon="<%= @article.longitude %>">
     </div>
 
-    <style>
-          #map{
-        height: 400px;
-      }
-    </style>
+
     <!-- 画像スライダー -->
     <ul class="bxslider">
       <% @images.each do |image| %>
@@ -39,6 +49,7 @@
           </li>
       <% end %>
     </ul>
+    <%= render 'articles/graph', image: @images %>
       <!-- 記事に対するコメントをする。 -->
   <% if user_signed_in? %>
     <% if @article_comment.errors.any? %>
@@ -64,7 +75,6 @@
     <% end %>
   <% end %>
 </div>
-
     <!-- 記事に対してのコメントを表示 -->
       <table class="table table-hover table-inverse">
         <thead>
@@ -94,7 +104,7 @@
         </tbody>
       </table>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV["GOOGLE_MAP_KEY"]%>&callback=initMap" defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV["GOOGLE_API_KEY"]%>&callback=initMap" defer></script>
 <script>
 /*
 mapを関数の外で定義(codeAddressでも使うため)
@@ -113,15 +123,15 @@ let map
 
 function initMap(){
   map = new google.maps.Map(document.getElementById('map'), {
-  center: {lat: latitude, lng: longitude},
-  zoom: 8
+    center: {lat: latitude, lng: longitude},
+    zoom: 8
   });
  // 保存された地図情報からピンをさす
 
     // google.maps.LatLngインスタンスを生成
     pos = new google.maps.LatLng(
-    latitude, //latitude
-    longitude //longitude
+      latitude, //latitude
+      longitude //longitude
     );
     default_marker = new google.maps.Marker({
     map: map,
