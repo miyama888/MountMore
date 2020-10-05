@@ -2,6 +2,8 @@ class ArticlesController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   def index
+    @compareFavorite = 0
+    @j  = 1
     @articles = Article.all
     @articles_c = Article.all.page(params[:page]).per(6).order(created_at: :desc)
     @all_ranks = Article.find(Favorite.group(:article_id).order('count(article_id) desc').limit(5).pluck(:article_id))

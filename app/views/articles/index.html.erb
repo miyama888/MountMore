@@ -14,33 +14,46 @@
       </ul>
     </div>
     <div class = "col-xs-4">
-    <% @all_ranks.each.with_index(1) do |article, i| %>
-
-    <div class = "box__right d-flex justify-content-end">
-      <!-- 記事に対するいいねの数でランキングを表示 -->
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <span class = "badge">
-            第<%= i %>位
-          </span>
-            <%=link_to article_path(article.id) do%><%= article.title.truncate(10) %><% end %>
-            <%= article.favorites.count %>ポイント
-        </div>
-        <div class="panel-body">
-          <!-- 記事に関連した複数の写真からidの最初から1つだけ取ってくる -->
-            <div class = "row">
-              <div class = "col-xs-4">
-                <% article.article_images.first(1).each do |image| %>
-                <%=attachment_image_tag image, :image, :fill, 100, 100, format: 'jpeg',  class: "img-responsive"%><% end %>
-              </div>
-              <div class = "col-xs-8">
-                <span><%= article.body.truncate(15) %></span>
-              </div>
+      <% @all_ranks.each.with_index(1) do |article, i| %>
+        <div class = "box__right d-flex justify-content-end">
+          <!-- 記事に対するいいねの数でランキングを表示 -->
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <% if i == 1 %>
+                <% compareFavorite = article.favorites.count %>
+              <% end %>
+              <% if article.favorites.count != compareFavorite %>
+                <% j = i %>
+                <span class = "badge">
+                  第<%= j %>位
+                </span>
+                <%=link_to article_path(article.id) do%><%= article.title.truncate(10) %><% end %>
+                <%= article.favorites.count %>ポイント
+                <% compareFavorite = article.favorites.count %>
+              <% else %>
+                <%  compareFavorite = article.favorites.count%>
+                <span class = "badge">
+                  第<%= j %>位
+                </span>
+                <%=link_to article_path(article.id) do%><%= article.title.truncate(10) %><% end %>
+                <%= article.favorites.count %>ポイント
+              <% end%>
             </div>
+              <div class="panel-body">
+              <!-- 記事に関連した複数の写真からidの最初から1つだけ取ってくる -->
+                <div class = "row">
+                  <div class = "col-xs-4">
+                    <% article.article_images.first(1).each do |image| %>
+                    <%=attachment_image_tag image, :image, :fill, 100, 100, format: 'jpeg',  class: "img-responsive"%><% end %>
+                  </div>
+                  <div class = "col-xs-8">
+                    <span><%= article.body.truncate(15) %></span>
+                  </div>
+                </div>
+              </div>
           </div>
-      </div>
-    </div>
-    <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 

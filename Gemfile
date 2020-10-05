@@ -80,6 +80,7 @@ gem "refile-mini_magick", github: 'refile/refile-mini_magick'
 gem 'dotenv-rails'
 gem 'geocoder'
 gem 'kaminari', '~> 1.2.1'
+gem 'jquery-ui-rails'
 
 group :production do
   gem 'mysql2'

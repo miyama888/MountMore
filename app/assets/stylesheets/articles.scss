@@ -10,7 +10,7 @@
 	height: 240px;
 }
 
-.circle-mask-outer, .circle-mask-inner{
+.circle-mask-outer,.circle-mask-inner{
 	overflow: hidden;
 	position: absolute;
 	width: 120px;
@@ -39,7 +39,7 @@
 }
 
 .circle-mask-outer.right .circle-mask-inner{
-	right: 100%;
+    right: 100%;
 	-webkit-transform-origin: 100% 50%;
 	-ms-transform-origin: 100% 50%;
 	transform-origin: 100% 50%;
@@ -53,6 +53,18 @@
 	height: 240px;
 }
 
+.chart-content{
+	left: 20px;
+	top: 20px;
+	position: absolute;
+	border-radius: 50%;
+	padding-top: 40px;
+	width: 200px;
+	height: 200px;
+	text-align: center;
+	background-color: #fff;
+}
+
 .circle-mask-outer.left .circle-body{
 	right: 0;
 }
@@ -63,4 +75,11 @@
 
 .circle-body{
 	background-color: red;
+}
+
+.graph-back{
+	background-color: black;
+}
+.right{
+	left: 120px;
 }

@@ -1,26 +1,30 @@
 <% image.each do|f| %>
+	<div class = "row">
 	<% f.tags.each do |t| %>
-		<div id = "scene-2-content">
-			<div class = "charts clearfix">
-				<div class = "chart" id = "water">
-					<div class = "circle-mask-outer left">
-						<div class = "circle-mask-inner">
-							<div class = "circle-body"></div>
+		<div class = "col-xs-6 graph-back">
+			<div class = "scene-2-content">
+				<div class = "charts clearfix">
+					<div class = "chart" >
+						<div class = "circle-mask-outer left">
+							<div class = "circle-mask-inner">
+								<div class = "circle-body left"></div>
+							</div>
 						</div>
-					</div>
-					<div class = "circle-mask-outer right">
-						<div class = "circle-mask-inner">
-							<div class = "circle-body"></div>
+						<div class = "circle-mask-outer right">
+							<div class = "circle-mask-inner">
+								<div class = "circle-body right"></div>
+							</div>
 						</div>
-					</div>
-					<div class = "chart-content">
-						<p class = "text">
-							<span class = "precent-number"><%= t.score * 100 %></span>
-							<span class = "precent-symbol">%</span>
-						</p>
+						<div class = "chart-content">
+							<p class = "text">
+								<span class = "percent-number"><%= t.score * Constants::PERCENT %></span>
+								<span class = "percent-symbol">%</span>
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	<% end %>
+	</div>
 <% end %>

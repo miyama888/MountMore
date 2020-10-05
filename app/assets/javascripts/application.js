@@ -14,7 +14,7 @@
 //= require jquery
 //= require rails-ujs
 //= require activestorage
-
+//= require jquery-ui
 //= require bxslider
 //= require bootstrap
 

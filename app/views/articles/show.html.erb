@@ -1,4 +1,3 @@
-
 <div class = "container article-list">
   <div class = "article-list_article-logo">
 		<h1>記事詳細</h1>
@@ -24,14 +23,14 @@
     <!-- 感情分析値を表示 -->
     <% if @article.score >= 0 %>
     <div class="progress">
-      <div class="progress-bar" role="progressbar" style="width: <%= @article.score * 100%>%;">
-        <%= @article.score * 100%>
+      <div class="progress-bar" role="progressbar" style="width: <%= @article.score * Constants::PERCENT %>%;">
+        <%= @article.score * Constants::PERCENT %>
       </div>
     </div>
     <% else %>
     <div class="progress">
-      <div class="progress-bar-danger" role="progressbar" style="width: <%= @article.score * -100%>%;">
-        <%= @article.score * -100%>
+      <div class="progress-bar-danger" role="progressbar" style="width: <%= @article.score * -Constants::PERCENT %>%;">
+        <%= @article.score * -Constants::PERCENT %>
       </div>
     </div>
     <% end %>
@@ -49,7 +48,10 @@
           </li>
       <% end %>
     </ul>
+    <!-- 写真の要素のラベルとその確率を円グラフで表示 -->
+    <ul>
     <%= render 'articles/graph', image: @images %>
+  </ul>
       <!-- 記事に対するコメントをする。 -->
   <% if user_signed_in? %>
     <% if @article_comment.errors.any? %>
