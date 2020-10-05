@@ -21,49 +21,43 @@
       <% end %>
     <% end%>
     <!-- 感情分析値を表示 -->
+    <h2>記事から読み取れる感情スコア</h2>
+    <h5>（プラス感情に傾いてたら青、マイナス感情に傾いてたら赤のバーで表示されます。）</h5>
     <% if @article.score >= 0 %>
     <div class="progress">
       <div class="progress-bar" role="progressbar" style="width: <%= @article.score * Constants::PERCENT %>%;">
-        <%= @article.score * Constants::PERCENT %>
+        <label class = "score-percent"><%= @article.score * Constants::PERCENT %>%</label>
       </div>
     </div>
     <% else %>
     <div class="progress">
       <div class="progress-bar-danger" role="progressbar" style="width: <%= @article.score * -Constants::PERCENT %>%;">
-        <%= @article.score * -Constants::PERCENT %>
+        <label class = "score-percent"><%= @article.score * -Constants::PERCENT %>%</label>
       </div>
     </div>
     <% end %>
       <h2><%= @article.title %></h2>
       <text><%= @article.body %></text>
-    <div id='map' data-lat="<%= @article.latitude %>" data-lon="<%= @article.longitude %>">
-    </div>
-
-
+    <!-- 写真の要素のラベルとその確率を円グラフで表示 -->
+    <h2>写真の成分とその確率</h2>
+    <ul class="bxslider">
+      <%= render 'articles/graph', image: @images %>
+    </ul>
     <!-- 画像スライダー -->
+    <h2>写真</h2>
     <ul class="bxslider">
       <% @images.each do |image| %>
           <li>
-                <%= attachment_image_tag image, :image %>
+            <strong>No.<%= image.id %></strong>
+            <%= attachment_image_tag image, :image, format: 'jpeg', size: "1000x800" %>
           </li>
       <% end %>
     </ul>
-    <!-- 写真の要素のラベルとその確率を円グラフで表示 -->
-    <ul>
-    <%= render 'articles/graph', image: @images %>
-  </ul>
+    <!-- 地図を表示 -->
+    <h2>記事の該当場所</h2>
+      <div id='map' data-lat="<%= @article.latitude %>" data-lon="<%= @article.longitude %>"></div>
       <!-- 記事に対するコメントをする。 -->
   <% if user_signed_in? %>
-    <% if @article_comment.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@article_comment.errors.count, "error") %> prohibited this product from being saved:</h2>
-            <ul>
-              <% @article_comment.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-    <% end %>
     <%= form_for [@article, @article_comment] do |f| %>
       <div class = "field">
         <h2>記事へコメント</h2>
@@ -76,7 +70,6 @@
       </div>
     <% end %>
   <% end %>
-</div>
     <!-- 記事に対してのコメントを表示 -->
       <table class="table table-hover table-inverse">
         <thead>
@@ -102,10 +95,9 @@
               <% end %>
             <%end%>
           </tr>
-
         </tbody>
       </table>
-
+</div>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV["GOOGLE_API_KEY"]%>&callback=initMap" defer></script>
 <script>
 /*

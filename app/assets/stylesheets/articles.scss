@@ -74,12 +74,43 @@
 }
 
 .circle-body{
-	background-color: red;
+	background-color: #0eac67;
 }
 
 .graph-back{
 	background-color: black;
 }
+
 .right{
 	left: 120px;
+}
+
+.text{
+	margin-top: 10px;
+	font-size: 20px;
+}
+
+.tag {
+  background-color: #34a9bc;;
+  display: inline;
+  padding: 2px 15px 3px;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 5;
+  color: #fff;
+  border-radius: 50%;
+}
+
+.no{
+	text-align: center;
+	line-height: 3;
+	font-size: 100px;
+}
+
+.score-percent{
+	color: #00FF00;
+	text-align: center;
+}
+.progress{
+	text-align: center;
 }

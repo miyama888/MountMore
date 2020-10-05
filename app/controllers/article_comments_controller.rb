@@ -4,9 +4,9 @@ class ArticleCommentsController < ApplicationController
     comment = current_user.article_comments.new(article_comment_params)
     comment.article_id = article.id
     if comment.save
-      redirect_to article_path(article)
+      redirect_to article_path(article), notice: "コメントを投稿しました。"
     else
-      redirect_to request.referer
+      redirect_to request.referer, notice: "コメントが空欄です。コメントを入力してください。"
     end
   end
 

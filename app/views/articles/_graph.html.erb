@@ -18,7 +18,8 @@
 						<div class = "chart-content">
 							<p class = "text">
 								<span class = "percent-number"><%= t.score * Constants::PERCENT %></span>
-								<span class = "percent-symbol">%</span>
+								<span class = "percent-symbol">%</span><br>
+								<label class = "tag"><%= t.name %></label>
 							</p>
 						</div>
 					</div>
@@ -26,5 +27,6 @@
 			</div>
 		</div>
 	<% end %>
+		<p class = "no">No.<%= f.id %></p>
 	</div>
 <% end %>
