@@ -2,8 +2,8 @@ class ArticlesController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   def index
-    @compareFavorite = 0
-    @j  = 1
+    # compareFavorite = 0
+    # j  = 1
     @articles = Article.all
     @articles_c = Article.all.page(params[:page]).per(6).order(created_at: :desc)
     @all_ranks = Article.find(Favorite.group(:article_id).order('count(article_id) desc').limit(5).pluck(:article_id))
@@ -41,7 +41,14 @@ class ArticlesController < ApplicationController
 
   def update
     @article = Article.find_by(id: params[:id])
+    @article.score = Language.get_data(article_params[:body])
     if @article.update(article_params)
+       @article.article_images.each do |article_image|
+        tags = Vision.get_image_data(article_image.image)
+        tags.each do |tag|
+          article_image.tags.create(name: tag['description'], score: tag['score'])
+        end
+       end
       redirect_to article_path(@article), notice: "記事を更新しました。"
     else
       render :edit
