@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  before_action :ensure_correct_user, only: [:edit, :update]
   def index
     # compareFavorite = 0
     # j  = 1
@@ -43,13 +43,13 @@ class ArticlesController < ApplicationController
     @article = Article.find_by(id: params[:id])
     @article.score = Language.get_data(article_params[:body])
     if @article.update(article_params)
-       unless article_params[:article_images_images].nil?
-       @article.article_images.each do |article_image|
-        tags = Vision.get_image_data(article_image.image)
-        tags.each do |tag|
-          article_image.tags.create(name: tag['description'], score: tag['score'])
-        end
-       end
+        unless article_params[:article_images_images].nil?
+         @article.article_images.each do |article_image|
+          tags = Vision.get_image_data(article_image.image)
+          tags.each do |tag|
+            article_image.tags.create(name: tag['description'], score: tag['score'])
+          end
+         end
        end
       redirect_to article_path(@article), notice: "記事を更新しました。"
     else
