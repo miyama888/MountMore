@@ -15,8 +15,15 @@
 //= require rails-ujs
 //= require activestorage
 //= require jquery-ui
+//= require jquery.bxslider
 //= require bxslider
 //= require bootstrap
 
 //= require_tree .
 
+// 写真の複数投稿
+
+// $(document).ready(function(){
+
+	// initMap();
+// });

@@ -10,8 +10,8 @@
         </div>
   <% end %>
 
-            <h1>記事を編集する</h1>
-  <%= form_for(@article) do |f| %>
+  <h1>記事を編集する</h1>
+  <%= form_for(@article, html: {id: 'post_article'}) do |f| %>
             <%= f.hidden_field :latitude, id: 'form_latitude' %>
             <%= f.hidden_field :longitude, id: 'form_longitude' %>
           <div class = "field">
@@ -27,25 +27,25 @@
             <%= f.text_area :body, class: "col-xs-12" %>
           </div>
           <div class = "row">
-          <%= f.attachment_field :article_images_images, multiple: true, id: "article_image" %>
+            <%= f.attachment_field :article_images_images, multiple: true, id: "article_image" %>
           </div>
+          <h2>地図検索</h2>
+          <h5>住所または郵便番号を入力し実行してください</h5>
+          <!-- 地名入力用のinputを追加 -->
+          <input id="address" type="textbox" value="">
+
+          <!-- buttonをクリックしたらcodeAddressを実行　-->
+          <input type="button" value="実行" onclick="codeAddress()">
+          <div id='map'></div>
           <div class = "actions row">
-            <%= f.submit '内容を更新する', class: "btn btn-primary col-xs-12" %>
+            <%= f.submit '内容を更新する', class: "btn btn-primary col-xs-12", id: 'post'%>
           </div>
   <% end %>
               <%= link_to "詳細へ", article_path(@article) %>
               |
-	           <%= link_to "戻る", root_path %>
+             <%= link_to "一覧へ", root_path %>
+
 </div>
-  <h2>地図検索</h2>
-  <h5>住所または郵便番号を入力し実行してください</h5>
-  <!-- 地名入力用のinputを追加 -->
-  <input id="address" type="textbox" value="">
-
-  <!-- buttonをクリックしたらcodeAddressを実行　-->
-  <input type="button" value="実行" onclick="codeAddress()">
-  <div id='map'></div>
-
 <script>
 /*
 mapを関数の外で定義(codeAddressでも使うため)
@@ -96,20 +96,20 @@ function codeAddress(){
 =initMap" async defer></script>
 <!-- 写真の複数投稿 -->
 <script>
-  // idについてクリック等のイベントが生じたら、eいかを実行せよという命令。e＝イベント情報を示す。EventListenerとは、イベントを拾う（今回でいうclick）
+  // idについてクリック等のイベントが生じたら、eいかを実行せよという命令。e＝イベント情報を示す。EventListenerとは、イベントを拾う（今回でいうclick
   document.getElementById('post').addEventListener('click',(e)=>{
     e.preventDefault();
-    document.getElementById('new_article').name = 'new_article'
-    // formに強制的にnew_articleと任意の名前を付与
+    document.getElementById('post_article').name = 'post_article'
+    // formに強制的にpost_articleと任意の名前を付与
     // preventDefault()=クリックイベントを無効化。無効化しないと無条件にデータを送信してします。
     var files = document.getElementById("article_image").files;
     // <div><h1>は全てElement。なので、article_imageという名前がついたid(Element)を呼び出す
     // lengthが選んだファイルの数。lengthで数え上げている。filesがhtml上の選択ボックスのtype
-    if(files.length>5){
-      alert('画像ファイルは5枚以内で投稿して下さい')
+    if(files.length>3){
+      alert('画像ファイルは3枚以内で投稿して下さい')
     }
     else{
-       document.new_article.submit()
+       document.post_article.submit()
        // このnew_articleは5行目で任意につけたフォーム。このdocument.form.submit()で、preventDefault();で無効化したものを再度有効化している。
     }
   });

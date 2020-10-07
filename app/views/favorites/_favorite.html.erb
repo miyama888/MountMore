@@ -10,9 +10,9 @@
   <% end %>
 <% else %>
 	<% if article.favorites.count >= 1 %>
-  		<span class="glyphicon glyphicon-heart"　data-toggle="tooltip" title="ツールチップ（デフォルト）"><%= article.favorites.count %></span>
+  		<span class="glyphicon glyphicon-heart unuser-heart"　data-toggle="tooltip" title="いいね機能はログインユーザーのみ使用できます。"><%= article.favorites.count %></span>
   <% else %>
-  		<span class="glyphicon glyphicon-heart-empty"　data-toggle="tooltip" title="ツールチップ（デフォルト）"><%= article.favorites.count %></span>
+  		<span class="glyphicon glyphicon-heart-empty unuser-heart"　data-toggle="tooltip" title="いいね機能はログインユーザーのみ使用できます。"><%= article.favorites.count %></span>
   <%end%>
 <% end %>
 

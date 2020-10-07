@@ -39,7 +39,7 @@
       <h2><%= @article.title %></h2>
       <text><%= @article.body %></text>
     <!-- 写真の要素のラベルとその確率を円グラフで表示 -->
-    <h2>写真の成分とその確率</h2>
+    <h2>写真の上位３成分とその確率</h2>
     <ul class="bxslider">
       <%= render 'articles/graph', image: @images %>
     </ul>

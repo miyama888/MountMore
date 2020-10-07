@@ -1,3 +1,3 @@
 $(function () {
-	$('[data-toggle="tooltip"]').tooltip();
+	$('.unuser-heart').tooltip();
 });

@@ -1,15 +1,16 @@
 class UsersController < ApplicationController
   # ログイン中の現在のユーザーの情報のみ編集できる
-  before_action :correct_user, only: [:edit, :update]
+  before_action :authenticate_user!, only: [:index, :edit, :update, :destroy]
+  before_action :correct_user, only: [ :edit, :update, :destroy]
 
   def index
     @user = current_user
-    @users = User.all
+    @users = User.all.page(params[:page]).per(6)
   end
 
   def show
     @user = User.find(params[:id])
-    @articles = @user.articles
+    @articles = @user.articles.page(params[:page]).per(6)
   end
 
   def edit

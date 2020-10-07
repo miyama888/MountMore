@@ -15,12 +15,14 @@
   	           <tr>
                 <td><%= attachment_image_tag users, :self_image, :fill, 60, 60, format: 'jpeg', class: "img pull-left self-img", fallback: "no_image.jpg" %></td>
                 <td><%= users.user_name %></td>
-
                 <td><%= link_to "詳細へ", user_path(users.id) %></td>
               </tr>
             <% end %>
           </tbody>
         </table>
+    </div>
+    <div class = "text-center">
+      <%= paginate  @users%>
     </div>
   </div>
 </div>

@@ -17,6 +17,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.html{
+	min-height: 100%;
+}
+
 .login-box{
 	background-image: image-url("yamahukei.jpg");
 	height: 800px;
@@ -124,7 +128,6 @@ color: blue;
 
 }
 .footer_head{
-
 	height: 200px;
 	background: rgba(255,255,255,0.5);
 	background-image: image-url("headyama.jpg");
