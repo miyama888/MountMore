@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # ログイン中の現在のユーザーの情報のみ編集できる
-  before_action :authenticate_user!, only: [:index, :edit, :update, :destroy]
-  before_action :correct_user, only: [ :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:index, :show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:show, :edit, :update, :destroy]
 
   def index
     @user = current_user

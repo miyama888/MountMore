@@ -17,9 +17,9 @@
     	      			<td></td>
              			<td><%=link_to article_path(article.id) do%><%= article.title %><% end %></td>
              			<td><%= article.body.truncate(10) %></td>
-
+                  <% if  @user.id == current_user.id %>
                     <td><%= link_to "削除する", article_path(article), method: :delete, "data-confirm" => "本当に消しますか？", class: "label label-danger" %></td>
-
+                  <% end %>
           	</tr>
           <% end %>
     		</tbody>
@@ -42,12 +42,10 @@
       	 <th><p class = "profile-introduction"><%= @user.introduction %></p></th>
         </tr>
       </table>
-      <% if user_signed_in? %>
     <% if  @user.id == current_user.id %>
       <p><%= link_to "プロフィールを編集する", edit_user_path(@user.id), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %></p>
       <p><%= link_to "アカウントを削除する", user_path(@user.id), method: :delete, "data-confirm" => "削除することによりアカウントに関連した投稿含む全てのデータが削除され、データの復元はできません！本当に削除しますか？", class: "col-xs-12 btn btn-danger" %></p>
   <% end %>
-  <%end%>
       </div>
   </div>
 </div>
