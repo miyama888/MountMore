@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
     # compareFavorite = 0
     # j  = 1
     @articles = Article.all
-    @articles_c = Article.all.page(params[:page]).per(6).order(created_at: :desc)
+    @articles_index = Article.all.page(params[:page]).per(6).order(created_at: :desc)
     @all_ranks = Article.find(Favorite.group(:article_id).order('count(article_id) desc').limit(5).pluck(:article_id))
     # 全画像情報取得
     @images = ArticleImage.all.order(created_at: :desc).limit(10)

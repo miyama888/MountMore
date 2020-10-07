@@ -24,17 +24,17 @@
     <h2>記事から読み取れる感情スコア</h2>
     <h5>（プラス感情に傾いてたら青、マイナス感情に傾いてたら赤のバーで表示されます。）</h5>
     <% if @article.score >= 0 %>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" style="width: <%= @article.score * Constants::PERCENT %>%;">
-        <label class = "score-percent"><%= @article.score * Constants::PERCENT %>%</label>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: <%= @article.score * Constants::PERCENT %>%;">
+          <label class = "score-percent"><%= @article.score * Constants::PERCENT %>%</label>
+        </div>
       </div>
-    </div>
-    <% else %>
-    <div class="progress">
-      <div class="progress-bar-danger" role="progressbar" style="width: <%= @article.score * -Constants::PERCENT %>%;">
-        <label class = "score-percent"><%= @article.score * -Constants::PERCENT %>%</label>
+      <% else %>
+      <div class="progress">
+        <div class="progress-bar-danger" role="progressbar" style="width: <%= @article.score * -Constants::PERCENT %>%;">
+          <label class = "score-percent"><%= @article.score * -Constants::PERCENT %>%</label>
+        </div>
       </div>
-    </div>
     <% end %>
       <h2><%= @article.title %></h2>
       <text><%= @article.body %></text>

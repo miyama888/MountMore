@@ -41,9 +41,11 @@ ul {
 .active{
 	padding-left: 5px;
 }
+
 .show{
 	height: 500px;
 }
+
 .main-image{
 
 	height: 500px;
@@ -54,8 +56,8 @@ ul {
 
 .tav{
 flex-direction: row-reverse;
-
 }
+
 .top{
 	background: rgba(255,255,255,0.5);
 	background-image: image-url("headyama.jpg");
@@ -63,6 +65,7 @@ flex-direction: row-reverse;
 	background-position:  bottom;
 	background-blend-mode:lighten;
 }
+
 .list_login_name{
 font-size: 25px;
 color: blue;
@@ -80,6 +83,13 @@ color: blue;
 	border: 1px solid;
 	border-color: red;
 }
+
+.ranking_outside{
+	border-width:5px;
+	border-style: outset;
+	border-color: yellow;
+}
+
 .ranking__aside{
 	margin-right: 20px;
 	width: 100px;
@@ -100,6 +110,10 @@ color: blue;
       width: 100%;
       height: 100%;
   }
+
+.panel-body{
+	height: 150px;
+}
 
 .about{
 	height: 800px;
@@ -123,10 +137,6 @@ color: blue;
 	margin-top: 100px;
 }
 
-.panel-body{
-
-
-}
 .footer_head{
 	height: 200px;
 	background: rgba(255,255,255,0.5);
@@ -135,9 +145,14 @@ color: blue;
 	background-position:  center;
 	background-blend-mode:lighten;
 }
+
 .foot{
 	text-align: center;
 	padding-top: 100px;
+}
+
+.panel-footer{
+	height: 100px;
 }
  #error_explanation{
 	width: 600px;

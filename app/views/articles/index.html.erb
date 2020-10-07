@@ -10,7 +10,8 @@
         <% end %>
       </ul>
     </div>
-    <div class = "col-xs-4">
+    <div class = "col-xs-4 ranking_outside">
+      <div class = "text-center"><strong>いいね数ランキング</strong></div>
       <% compareFavorite = 0  %>
       <% j = 1 %>
       <% @all_ranks.each.with_index(1) do |article, i| %>
@@ -58,7 +59,7 @@
 
 <!-- 記事一覧を表示 -->
   <div class = "row">
-    <% @articles_c.each do |article| %>
+    <% @articles_index.each do |article| %>
       <div class = "col-xs-4 panel-box">
         <div class="panel panel-primary boxed panelzone">
           <div class="panel-header">
@@ -83,7 +84,7 @@
   </div>
     <div class = "row">
       <div class = "col-xs-12 text-center">
-    <%= paginate  @articles_c%>
+    <%= paginate  @articles_index%>
       </div>
     </div>
 </div>
