@@ -58,16 +58,18 @@
       <div id='map' data-lat="<%= @article.latitude %>" data-lon="<%= @article.longitude %>"></div>
       <!-- 記事に対するコメントをする。 -->
   <% if user_signed_in? %>
-    <%= form_for [@article, @article_comment] do |f| %>
-      <div class = "field">
-        <h2>記事へコメント</h2>
-      </div>
-      <div class= "field row">
-        <%= f.text_area :comment, class: "col-xs-12" %>
-      </div>
-      <div class = "actions row">
-        <%= f.submit "コメントする", class: "btn btn-primary col-xs-12" %>
-      </div>
+    <% unless  @user.id == current_user.id %>
+      <%= form_for [@article, @article_comment] do |f| %>
+        <div class = "field">
+          <h2>記事へコメント</h2>
+        </div>
+        <div class= "field row">
+          <%= f.text_area :comment, class: "col-xs-12" %>
+        </div>
+        <div class = "actions row">
+          <%= f.submit "コメントする", class: "btn btn-primary col-xs-12" %>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
     <!-- 記事に対してのコメントを表示 -->
