@@ -18,8 +18,7 @@
 //= require jquery.bxslider
 //= require bxslider
 //= require bootstrap
-
-//= require_tree .
+//= require_tree ./common
 
 // 写真の複数投稿
 
