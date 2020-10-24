@@ -13,7 +13,3 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 Rails.application.config.assets.precompile += %w( jquery.japan-map.min.js )
-Rails.application.config.assets.precompile += %w(common/*.js)
-Rails.application.config.assets.precompile += %w(mapapi.js)
-Rails.application.config.assets.precompile += %w(picture.js)
-Rails.application.config.assets.precompile += %w(japanmap.js)
